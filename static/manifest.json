@@ -1,0 +1,8 @@
+{
+	"background_color": "#ffffff",
+	"theme_color": "#0000ff",
+	"name": "kcdc.fun",
+	"short_name": "kcdc.fun",
+	"display": "minimal-ui",
+	"start_url": "/"
+}
