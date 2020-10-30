@@ -17,6 +17,7 @@
 <h2>Can't Wait to Hear The Latest?</h2>
 <p><i>Subscribe to our newsletter!</i></p>
 <form name="subscribe" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="subscribe" />
   <p><label>Your Name: <input type="text" name="name" /></label></p>
   <p><label>Your Email: <input type="email" name="email" /></label></p>
   <p>
