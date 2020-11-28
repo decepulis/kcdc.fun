@@ -1,25 +1,28 @@
 <script>
   import Nav from "../components/Nav.svelte";
-
   export let segment;
 </script>
 
 <style>
   :global(html, body) {
-    font-family: "Comic Sans MS", serif;
-    background-color: blue;
-    color: yellow;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Courier Prime", monospace;
   }
   main {
-    min-width: 300px;
-    max-width: 500px;
-    padding: 0 1rem;
-    margin: 0 auto;
+    min-width: 320px;
   }
 </style>
 
-<Nav {segment} />
+<!-- <Nav {segment} /> -->
+
+<svelte:head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap"
+    rel="stylesheet" />
+</svelte:head>
 
 <main>
   <slot />
