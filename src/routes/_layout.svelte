@@ -6,20 +6,15 @@
 
 <style>
   :global(html, body) {
-    font-family: "Comic Sans MS", serif;
-    background-color: blue;
-    color: yellow;
-    text-align: center;
+    margin: 0;
+    padding: 0;
   }
   main {
-    min-width: 300px;
-    max-width: 500px;
-    padding: 0 1rem;
-    margin: 0 auto;
+    min-width: 375px;
   }
 </style>
 
-<Nav {segment} />
+<!-- <Nav {segment} /> -->
 
 <main>
   <slot />
