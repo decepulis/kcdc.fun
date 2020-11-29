@@ -1,8 +1,5 @@
 <script>
-  import {
-    initialize as initParallax,
-    clear as clearParallax,
-  } from "../components/smoothParallax";
+  import SmoothParallax from "smooth-parallax/dist/smooth-parallax.min.js";
 
   import { onMount } from "svelte";
 
@@ -17,8 +14,7 @@
   const layers = [BG, L4, L3, L2, L1, L0];
 
   onMount(() => {
-    initParallax(".parallax-layer");
-    return clearParallax;
+    SmoothParallax.init({ basePercentageOn: "pageScroll" });
   });
 </script>
 
@@ -31,7 +27,7 @@
     background-color: #272442;
   }
 
-  .parallax-layer {
+  .parallax-container div {
     position: fixed;
 
     height: 100vh;
@@ -81,10 +77,19 @@
 
 <div class="parallax-container">
   {#each layers as layer, layerIndex}
-    <div
-      class="parallax-layer"
-      alt="parallax layer {layerIndex}"
-      style="background-image: url({layer});" />
+    {#if layerIndex !== layers.length - 1}
+      <div
+        class="parallax-layer"
+        smooth-parallax
+        start-position-y="0"
+        end-position-y={-layerIndex / (layers.length - 1)}
+        alt="parallax layer {layerIndex}"
+        style="background-image: url({layer});" />
+    {:else}
+      <div
+        alt="parallax layer {layerIndex}"
+        style="background-image: url({layer}); position: absolute;" />
+    {/if}
   {/each}
 </div>
 
