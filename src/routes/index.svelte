@@ -1,7 +1,5 @@
 <script>
-  import SmoothParallax from "smooth-parallax/dist/smooth-parallax.min.js";
-
-  import { onMount } from "svelte";
+  import { spring } from "svelte/motion";
 
   import SubscribeForm from "../components/SubscribeForm.svelte";
 
@@ -13,9 +11,9 @@
   let BG = "img/L5.png";
   const layers = [BG, L4, L3, L2, L1, L0];
 
-  onMount(() => {
-    SmoothParallax.init({ basePercentageOn: "pageScroll" });
-  });
+  let scrollY;
+  let coords = spring({ y: 0 }, { stiffness: 0.2, damping: 1 });
+  $: coords.set({ y: scrollY });
 </script>
 
 <!--  -->
@@ -75,20 +73,23 @@
   <title>Kristin & Darius</title>
 </svelte:head>
 
+<svelte:window bind:scrollY />
+
 <div class="parallax-container">
   {#each layers as layer, layerIndex}
-    {#if layerIndex !== layers.length - 1}
+    {#if layerIndex === 0}
+      <!-- first layer fixed to 0,0 -->
+      <div style="background-image: url({layer});" />
+    {:else if layerIndex !== layers.length - 1}
+      <!-- middle layers managed by spring -->
       <div
-        class="parallax-layer"
-        smooth-parallax
-        start-position-y="0"
-        end-position-y={-layerIndex / (layers.length - 1)}
-        alt="parallax layer {layerIndex}"
-        style="background-image: url({layer});" />
+        style="
+          background-image: url({layer});
+          transform: translate3d(0,{(-$coords.y * layerIndex) / (layers.length - 1)}px,0)
+        " />
     {:else}
-      <div
-        alt="parallax layer {layerIndex}"
-        style="background-image: url({layer}); position: absolute;" />
+      <!-- last layer absolutely attached to scroll -->
+      <div style="background-image: url({layer}); position: absolute;" />
     {/if}
   {/each}
 </div>
