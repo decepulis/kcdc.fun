@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { spring } from "svelte/motion";
 
   import SubscribeForm from "../components/SubscribeForm.svelte";
@@ -11,7 +11,7 @@
   let BG = "img/L5.png";
   const layers = [BG, L4, L3, L2, L1, L0];
 
-  let scrollY;
+  let scrollY: number;
   let coords = spring({ y: 0 }, { stiffness: 0.2, damping: 1 });
   $: coords.set({ y: scrollY });
 </script>

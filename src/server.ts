@@ -6,8 +6,6 @@ import * as sapper from '@sapper/server';
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
-// This site is exported for SSG use on Netlify
-// So like, don't do anything here!
 polka() // You can also use Express
 	.use(
 		compression({ threshold: 0 }),
