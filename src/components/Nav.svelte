@@ -4,7 +4,11 @@
 
 <style>
   nav {
-    padding: 0 1em;
+    padding: 0 var(--gap);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   }
 
   ul {
@@ -27,23 +31,29 @@
   [aria-current] {
     position: relative;
     display: inline-block;
+    color: white;
   }
 
   [aria-current]::after {
     position: absolute;
     content: "";
-    width: calc(100% - 1em);
+    width: calc(100% - var(--gap));
     height: 2px;
-    background-color: rgb(255, 62, 0);
+    background-color: var(--cx);
     display: block;
-    bottom: -1px;
+    bottom: calc(var(--gap) - 2px);
   }
 
   a {
     color: inherit;
     text-decoration: none;
-    padding: 1em 0.5em;
+    padding: var(--gap) var(--gap-half);
     display: block;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  :global(:root) {
+    --nav-height: calc(1rem + var(--gap-2));
   }
 </style>
 
@@ -56,8 +66,18 @@
     </li>
     <li>
       <a
-        aria-current={segment === 'contact' ? 'page' : undefined}
-        href="contact">contact</a>
+        aria-current={segment === 'venue' ? 'page' : undefined}
+        href="venue">venue</a>
+    </li>
+    <li>
+      <a
+        aria-current={segment === 'hotels' ? 'page' : undefined}
+        href="hotels">hotels</a>
+    </li>
+    <li>
+      <a
+        aria-current={segment === 'registry' ? 'page' : undefined}
+        href="registry">registry</a>
     </li>
   </ul>
 </nav>

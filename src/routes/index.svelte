@@ -16,13 +16,29 @@
   $: coords.set({ y: scrollY });
 </script>
 
-<!--  -->
 <style>
   .parallax-container {
     height: 100vh;
     min-height: 75vw;
     max-height: 160vw;
-    background-color: #272442;
+    background-color: var(--c1);
+
+    margin-top: calc(-1 * var(--nav-height));
+    padding-bottom: var(--nav-height);
+  }
+
+  .parallax-container:after {
+    /* 
+    fill the padding bottom with background color
+    to fix the 3.8rem we opened up for the nav bar
+    */
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: calc(1.05 * var(--nav-height));
+    bottom: calc(-1.05 * var(--nav-height));
+    left: 0;
+    background-color: var(--c1);
   }
 
   .parallax-container div {
@@ -40,32 +56,18 @@
     will-change: transform;
   }
 
-  :global(body),
-  .content {
-    background-color: #272442;
-    color: white;
-  }
-
   .content {
     position: relative;
-    padding: 1.4rem;
+    padding: var(--gap);
 
     text-align: center;
-    min-height: calc(100vh - 2.8rem);
+    min-height: calc(100vh - var(--gap-2) - 50px);
+
+    background-color: var(--c1);
   }
 
   .content h1 {
     margin-top: 0;
-  }
-
-  .content:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2rem;
-    top: -2rem;
-    left: 0;
-    background-color: #272442;
   }
 </style>
 
