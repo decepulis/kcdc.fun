@@ -1,20 +1,11 @@
 <script lang="ts">
   import Nav from "../components/Nav.svelte";
+  import LayoutBackgroundColor from "../components/LayoutBackgroundColor.svelte";
+  import LayoutTransitionContainer from "../components/LayoutTransitionContainer.svelte";
+
   export let segment: string;
 
-  const backgroundsForSegment = {
-    venue: "var(--c2)",
-    hotels: "var(--c3)",
-    registry: "var(--c4)",
-  };
-
-  $: backgroundColor = backgroundsForSegment[segment] ?? "var(--c1)";
-  $: if (typeof window !== "undefined") {
-    window.document.documentElement.style.setProperty(
-      "--background-color",
-      backgroundColor
-    );
-  }
+  const transitionDuration = 500;
 </script>
 
 <style>
@@ -23,14 +14,14 @@
     --gap-half: calc(var(--gap) / 2);
     --gap-2: calc(var(--gap) * 2);
 
-    --c1: #272442;
-    --c2: #37325d;
-    --c3: #474077;
-    --c4: #574f92;
-    --c5: #6960a9;
-    --cx: rgb(241, 181, 125);
+    --content-width: 40rem;
 
-    --background-color: var(--c1);
+    --c1: 39, 36, 66;
+    --c2: 55, 50, 93;
+    --c3: 71, 64, 119;
+    --c4: 87, 79, 146;
+    --c5: 105, 96, 169;
+    --cx: 241, 181, 125;
   }
 
   :global(html, body) {
@@ -40,18 +31,9 @@
 
   :global(body) {
     font-family: "Courier Prime", monospace;
-
     color: white;
-    background-color: var(--background-color);
-    transition: background-color 0.5s ease-in-out;
-  }
-
-  main {
-    min-width: 320px;
   }
 </style>
-
-<Nav {segment} />
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -60,6 +42,8 @@
     rel="stylesheet" />
 </svelte:head>
 
-<main>
+<LayoutBackgroundColor {segment} {transitionDuration} />
+<Nav {segment} />
+<LayoutTransitionContainer {segment} {transitionDuration}>
   <slot />
-</main>
+</LayoutTransitionContainer>

@@ -21,10 +21,14 @@
     height: 100vh;
     min-height: 75vw;
     max-height: 160vw;
-    background-color: var(--c1);
+    background-color: rgb(var(--c1));
 
     margin-top: calc(-1 * var(--nav-height));
     padding-bottom: var(--nav-height);
+
+    position: relative;
+
+    grid-column: fullpage-start / fullpage-end;
   }
 
   .parallax-container:after {
@@ -36,9 +40,9 @@
     position: absolute;
     width: 100%;
     height: calc(1.05 * var(--nav-height));
-    bottom: calc(-1.05 * var(--nav-height));
+    bottom: 0;
     left: 0;
-    background-color: var(--c1);
+    background-color: rgb(var(--c1));
   }
 
   .parallax-container div {
@@ -58,12 +62,16 @@
 
   .content {
     position: relative;
-    padding: var(--gap);
-
-    text-align: center;
     min-height: calc(100vh - var(--gap-2) - 50px);
-
-    background-color: var(--c1);
+    background-color: rgb(var(--c1));
+    /* 
+    opt out of global grid
+    to show background color around content.
+    center will make it look pretty
+    */
+    grid-column: fullpage-start / fullpage-end;
+    padding: var(--gap);
+    text-align: center;
   }
 
   .content h1 {

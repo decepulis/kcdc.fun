@@ -8,7 +8,11 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(
+      rgba(var(--background-color), 1),
+      rgba(var(--background-color), 0.8) 1rem,
+      rgba(var(--background-color), 0)
+    );
   }
 
   ul {
@@ -39,7 +43,7 @@
     content: "";
     width: calc(100% - var(--gap));
     height: 2px;
-    background-color: var(--cx);
+    background-color: rgb(var(--cx));
     display: block;
     bottom: calc(var(--gap) - 2px);
   }
@@ -62,21 +66,29 @@
     <li>
       <a
         aria-current={segment === undefined ? 'page' : undefined}
+        sapper:noscroll
+        rel="prefetch"
         href=".">home</a>
     </li>
     <li>
       <a
         aria-current={segment === 'venue' ? 'page' : undefined}
+        sapper:noscroll
+        rel="prefetch"
         href="venue">venue</a>
     </li>
     <li>
       <a
         aria-current={segment === 'hotels' ? 'page' : undefined}
+        sapper:noscroll
+        rel="prefetch"
         href="hotels">hotels</a>
     </li>
     <li>
       <a
         aria-current={segment === 'registry' ? 'page' : undefined}
+        sapper:noscroll
+        rel="prefetch"
         href="registry">registry</a>
     </li>
   </ul>

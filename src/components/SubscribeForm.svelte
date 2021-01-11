@@ -1,6 +1,6 @@
 <style>
   form {
-    max-width: 500px;
+    max-width: var(--content-width);
     margin: 0 auto;
 
     display: grid;
