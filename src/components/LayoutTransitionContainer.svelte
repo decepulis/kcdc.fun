@@ -4,7 +4,7 @@
 	Establishes grid
 -->
 <script lang="ts">
-	import { fade } from "svelte/transition";
+	import { scale } from "svelte/transition";
 	export let segment: string;
 	export let pageTransitionDuration: number;
 
@@ -43,8 +43,8 @@
 <svelte:window bind:scrollY={y} />
 {#key segment}
 	<main
-		in:fade={{ duration: halfDuration, delay: halfDuration + transitionWiggleRoom }}
-		out:fade={{ duration: halfDuration }}
+		in:scale={{ duration: halfDuration, delay: halfDuration + transitionWiggleRoom, start: 0.99 }}
+		out:scale={{ duration: halfDuration, start: 0.99 }}
 		on:outroend={scrollToTop}>
 		<slot />
 	</main>
