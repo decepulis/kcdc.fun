@@ -5,7 +5,7 @@
 
   export let segment: string;
 
-  const transitionDuration = 500;
+  const pageTransitionDuration = 450;
 </script>
 
 <style>
@@ -15,6 +15,7 @@
     --gap-2: calc(var(--gap) * 2);
 
     --content-width: 40rem;
+    --min-page-width: 320px;
 
     --c1: 39, 36, 66;
     --c2: 55, 50, 93;
@@ -22,11 +23,17 @@
     --c4: 87, 79, 146;
     --c5: 105, 96, 169;
     --cx: 241, 181, 125;
+
+    --transition-duration: 150ms;
   }
 
   :global(html, body) {
     margin: 0;
     padding: 0;
+  }
+
+  :global(html) {
+    background-color: rgb(var(--c1));
   }
 
   :global(body) {
@@ -42,8 +49,8 @@
     rel="stylesheet" />
 </svelte:head>
 
-<LayoutBackgroundColor {segment} {transitionDuration} />
+<LayoutBackgroundColor {segment} {pageTransitionDuration} />
 <Nav {segment} />
-<LayoutTransitionContainer {segment} {transitionDuration}>
+<LayoutTransitionContainer {segment} {pageTransitionDuration}>
   <slot />
 </LayoutTransitionContainer>

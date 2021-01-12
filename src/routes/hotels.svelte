@@ -1,3 +1,9 @@
+<style>
+    :global(html) {
+        background-color: rgb(var(--c3));
+    }
+</style>
+
 <h1>Hotels</h1>
 <h2>What is Lorem Ipsum?</h2>
 <p>

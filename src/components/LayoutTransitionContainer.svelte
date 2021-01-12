@@ -6,10 +6,10 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
 	export let segment: string;
-	export let transitionDuration: number;
+	export let pageTransitionDuration: number;
 
 	const transitionWiggleRoom = 0;
-	const halfDuration = transitionDuration / 2 - transitionWiggleRoom / 2;
+	const halfDuration = pageTransitionDuration / 2 - transitionWiggleRoom / 2;
 
 	let y: number;
 	const scrollToTop = () => {
@@ -19,7 +19,7 @@
 
 <style>
 	main {
-		min-width: 320px;
+		min-width: var(--min-page-width);
 		display: grid;
 		grid-template-columns:
 			[fullpage-start]
