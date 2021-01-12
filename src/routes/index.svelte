@@ -16,13 +16,22 @@
   $: coords.set({ y: scrollY });
 </script>
 
-<!--  -->
 <style>
   .parallax-container {
-    height: 100vh;
+    /* 
+    We don't want the container to go
+    all the way to the top of the page;
+    only to the top of the box shadow in the nav bar
+    */
+    margin-top: calc(-1 * var(--gap));
+    height: calc(100vh - var(--nav-height) + var(--gap));
     min-height: 75vw;
     max-height: 160vw;
-    background-color: #272442;
+    background-color: rgb(var(--c1));
+
+    position: relative;
+
+    grid-column: fullpage-start / fullpage-end;
   }
 
   .parallax-container div {
@@ -40,32 +49,22 @@
     will-change: transform;
   }
 
-  :global(body),
-  .content {
-    background-color: #272442;
-    color: white;
-  }
-
   .content {
     position: relative;
-    padding: 1.4rem;
-
+    min-height: calc(100vh - var(--gap-2) - 50px);
+    background-color: rgb(var(--c1));
+    /* 
+    opt out of global grid
+    to show background color around content.
+    center will make it look pretty
+    */
+    grid-column: fullpage-start / fullpage-end;
+    padding: var(--gap);
     text-align: center;
-    min-height: calc(100vh - 2.8rem);
   }
 
   .content h1 {
     margin-top: 0;
-  }
-
-  .content:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2rem;
-    top: -2rem;
-    left: 0;
-    background-color: #272442;
   }
 </style>
 
