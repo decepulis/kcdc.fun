@@ -20,9 +20,11 @@
 <style>
 	main {
 		padding-top: var(--nav-height);
+		min-height: calc(100vh - var(--nav-height));
 
 		min-width: var(--min-page-width);
 		display: grid;
+		align-content: start;
 		grid-template-columns:
 			[fullpage-start]
 			minmax(var(--gap), 1fr)
