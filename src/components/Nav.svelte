@@ -6,8 +6,9 @@
   nav {
     padding: 0 var(--gap-half);
 
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
 
     z-index: 1000;
 

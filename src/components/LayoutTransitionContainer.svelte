@@ -19,6 +19,8 @@
 
 <style>
 	main {
+		padding-top: var(--nav-height);
+
 		min-width: var(--min-page-width);
 		display: grid;
 		grid-template-columns:

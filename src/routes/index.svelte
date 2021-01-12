@@ -18,31 +18,20 @@
 
 <style>
   .parallax-container {
-    height: 100vh;
+    /* 
+    We don't want the container to go
+    all the way to the top of the page;
+    only to the top of the box shadow in the nav bar
+    */
+    margin-top: calc(-1 * var(--gap));
+    height: calc(100vh - var(--nav-height) + var(--gap));
     min-height: 75vw;
     max-height: 160vw;
     background-color: rgb(var(--c1));
 
-    margin-top: calc(-1 * var(--nav-height));
-    padding-bottom: var(--nav-height);
-
     position: relative;
 
     grid-column: fullpage-start / fullpage-end;
-  }
-
-  .parallax-container:after {
-    /* 
-    fill the padding bottom with background color
-    to fix the 3.8rem we opened up for the nav bar
-    */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: calc(1.05 * var(--nav-height));
-    bottom: 0;
-    left: 0;
-    background-color: rgb(var(--c1));
   }
 
   .parallax-container div {
