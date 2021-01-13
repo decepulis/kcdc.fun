@@ -16,7 +16,47 @@
   $: coords.set({ y: scrollY });
 </script>
 
+<svelte:head>
+  <title>Kristin & Darius</title>
+</svelte:head>
+<svelte:window bind:scrollY />
+
+<div class="parallax-container">
+  {#each layers as layer, layerIndex}
+    {#if layerIndex === 0}
+      <!-- first layer fixed to 0,0 -->
+      <div style="background-image: url({layer});" />
+    {:else if layerIndex !== layers.length - 1}
+      <!-- middle layers managed by spring -->
+      <div
+        style="
+          background-image: url({layer});
+          transform: translate3d(0,{(-$coords.y *
+          layerIndex) /
+          (layers.length - 1)}px,0)
+        "
+      />
+    {:else}
+      <!-- last layer absolutely attached to scroll -->
+      <div style="background-image: url({layer}); position: absolute;" />
+    {/if}
+  {/each}
+</div>
+
+<section class="content">
+  <h1>Kristin and Darius are getting married!</h1>
+  <p><i>Watch this space for updates.</i></p>
+  <h2>Can't wait to hear the latest?</h2>
+
+  <SubscribeForm />
+</section>
+
 <style>
+  :global(html) {
+    --ssr-color: var(--c1);
+    background-color: rgb(--ssr-color);
+  }
+
   .parallax-container {
     /* 
     We don't want the container to go
@@ -72,35 +112,3 @@
     margin-top: 0;
   }
 </style>
-
-<svelte:head>
-  <title>Kristin & Darius</title>
-</svelte:head>
-<svelte:window bind:scrollY />
-
-<div class="parallax-container">
-  {#each layers as layer, layerIndex}
-    {#if layerIndex === 0}
-      <!-- first layer fixed to 0,0 -->
-      <div style="background-image: url({layer});" />
-    {:else if layerIndex !== layers.length - 1}
-      <!-- middle layers managed by spring -->
-      <div
-        style="
-          background-image: url({layer});
-          transform: translate3d(0,{(-$coords.y * layerIndex) / (layers.length - 1)}px,0)
-        " />
-    {:else}
-      <!-- last layer absolutely attached to scroll -->
-      <div style="background-image: url({layer}); position: absolute;" />
-    {/if}
-  {/each}
-</div>
-
-<section class="content">
-  <h1>Kristin and Darius are getting married!</h1>
-  <p><i>Watch this space for updates.</i></p>
-  <h2>Can't wait to hear the latest?</h2>
-
-  <SubscribeForm />
-</section>

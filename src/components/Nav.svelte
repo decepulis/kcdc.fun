@@ -2,6 +2,52 @@
   export let segment: string;
 </script>
 
+<nav>
+  <ul>
+    <li>
+      <a
+        aria-current={segment === undefined ? "page" : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        style="font-style:italic;"
+        href=".">kcdc</a
+      >
+    </li>
+    <li>
+      <a
+        aria-current={segment === "rsvp" ? "page" : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        href="rsvp">rsvp</a
+      >
+    </li>
+    <li>
+      <a
+        aria-current={segment === "venue" ? "page" : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        href="venue">venue</a
+      >
+    </li>
+    <li>
+      <a
+        aria-current={segment === "hotels" ? "page" : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        href="hotels">hotels</a
+      >
+    </li>
+    <li>
+      <a
+        aria-current={segment === "registry" ? "page" : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        href="registry">registry</a
+      >
+    </li>
+  </ul>
+</nav>
+
 <style>
   :global(:root) {
     --nav-height: calc(1rem + var(--gap-2));
@@ -43,9 +89,10 @@
     left: 0;
     top: 0;
     /* background color stops just under text */
-    background-color: rgb(var(--background-color));
+    background-color: rgb(var(--background-color, var(--ssr-color)));
     /* gradient under text handled by shadow */
-    box-shadow: 0 0 var(--gap) var(--gap) rgb(var(--background-color));
+    box-shadow: 0 0 var(--gap) var(--gap)
+      rgb(var(--background-color, var(--ssr-color)));
     transition: background-color var(--page-transition-duration) ease-in-out,
       box-shadow var(--page-transition-duration) ease-in-out;
   }
@@ -72,7 +119,8 @@
     Of course, once again, we need to use shadows instead of gradients
     because we can't transition gradients but we can shadows
     */
-    box-shadow: 0 0 var(--gap-half) var(--gap-half) rgb(var(--background-color));
+    box-shadow: 0 0 var(--gap-half) var(--gap-half)
+      rgb(var(--background-color, var(--ssr-color)));
     transition: box-shadow var(--page-transition-duration) ease-in-out;
   }
   ul::before {
@@ -126,44 +174,3 @@
     opacity: 1;
   }
 </style>
-
-<nav>
-  <ul>
-    <li>
-      <a
-        aria-current={segment === undefined ? 'page' : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        style="font-style:italic;"
-        href=".">kcdc</a>
-    </li>
-    <li>
-      <a
-        aria-current={segment === 'rsvp' ? 'page' : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="rsvp">rsvp</a>
-    </li>
-    <li>
-      <a
-        aria-current={segment === 'venue' ? 'page' : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="venue">venue</a>
-    </li>
-    <li>
-      <a
-        aria-current={segment === 'hotels' ? 'page' : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="hotels">hotels</a>
-    </li>
-    <li>
-      <a
-        aria-current={segment === 'registry' ? 'page' : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="registry">registry</a>
-    </li>
-  </ul>
-</nav>
