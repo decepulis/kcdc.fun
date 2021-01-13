@@ -73,6 +73,9 @@
   }
 </style>
 
+<svelte:head>
+  <title>Kristin & Darius</title>
+</svelte:head>
 <svelte:window bind:scrollY />
 
 <div class="parallax-container">
