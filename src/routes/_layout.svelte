@@ -34,11 +34,16 @@
 
   :global(html) {
     background-color: rgb(var(--c1));
+    box-sizing: border-box;
   }
 
   :global(body) {
     font-family: "Courier Prime", monospace;
     color: white;
+  }
+
+  :global(*, *:before, *:after) {
+    box-sizing: inherit;
   }
 </style>
 

@@ -20,7 +20,7 @@
 <style>
 	main {
 		padding-top: var(--nav-height);
-		min-height: calc(100vh - var(--nav-height));
+		min-height: 100vh;
 
 		min-width: var(--min-page-width);
 		display: grid;

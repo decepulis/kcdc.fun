@@ -56,7 +56,7 @@
 
   .content {
     position: relative;
-    min-height: calc(100vh - var(--gap-2) - 50px);
+    min-height: calc(100vh - var(--gap-2));
     background-color: rgb(var(--c1));
     /* 
     opt out of global grid
