@@ -4,5 +4,9 @@
     }
 </style>
 
+<svelte:head>
+    <title>Kristin & Darius | Registry</title>
+</svelte:head>
+
 <h1>Registry</h1>
 <p><i>Coming Soon...</i></p>

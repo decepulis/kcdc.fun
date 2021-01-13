@@ -1,8 +1,26 @@
 {
-	"background_color": "#ffffff",
-	"theme_color": "#0000ff",
-	"name": "kcdc.fun",
-	"short_name": "kcdc.fun",
+	"name": "kcdc",
+	"short_name": "kcdc",
 	"display": "minimal-ui",
-	"start_url": "/"
+	"start_url": "/",
+    "icons": [
+		{
+			"src": "img/favicon/maskable_icon_x1.png",
+			"sizes": "1661x1661",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "img/favicon/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "img/favicon/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"theme_color": "#272442",
+	"background_color": "#272442"
 }

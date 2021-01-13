@@ -42,13 +42,6 @@
   }
 </style>
 
-<svelte:head>
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap"
-    rel="stylesheet" />
-</svelte:head>
-
 <LayoutBackgroundColor {segment} {pageTransitionDuration} />
 <Nav {segment} />
 <LayoutTransitionContainer {segment} {pageTransitionDuration}>

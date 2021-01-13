@@ -4,5 +4,9 @@
     }
 </style>
 
+<svelte:head>
+    <title>Kristin & Darius | Venue</title>
+</svelte:head>
+
 <h1>Venue</h1>
 <p><i>Coming Soon...</i></p>

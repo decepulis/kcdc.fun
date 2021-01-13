@@ -3,12 +3,12 @@
 
   import SubscribeForm from "../components/SubscribeForm.svelte";
 
-  let L0 = "img/L0.svg";
-  let L1 = "img/L1.svg";
-  let L2 = "img/L2.svg";
-  let L3 = "img/L3.svg";
-  let L4 = "img/L4.svg";
-  let BG = "img/L5.png";
+  let L0 = "img/layers/L0.svg";
+  let L1 = "img/layers/L1.svg";
+  let L2 = "img/layers/L2.svg";
+  let L3 = "img/layers/L3.svg";
+  let L4 = "img/layers/L4.svg";
+  let BG = "img/layers/L5.png";
   const layers = [BG, L4, L3, L2, L1, L0];
 
   let scrollY: number;
@@ -72,10 +72,6 @@
     margin-top: 0;
   }
 </style>
-
-<svelte:head>
-  <title>Kristin & Darius</title>
-</svelte:head>
 
 <svelte:window bind:scrollY />
 

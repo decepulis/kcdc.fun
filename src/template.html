@@ -3,13 +3,25 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<meta name="theme-color" content="#333333">
+	<meta name="theme-color" content="#272442">
 
 	%sapper.base%
 
 	<link rel="stylesheet" href="global.css">
+	
 	<link rel="manifest" href="manifest.json" crossorigin="use-credentials">
-	<link rel="icon" type="image/png" href="favicon.png">
+	<meta name="msapplication-config" content="browserconfig.xml">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+	<link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#272442">
+	
+	<meta name="apple-mobile-web-app-title" content="kcdc">
+	<meta name="application-name" content="kcdc">
+	<meta name="msapplication-TileColor" content="#272442">
+
+	<title>Kristin & Darius</title>
 
 	<!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
@@ -20,6 +32,10 @@
 	     for the current page. CSS for the rest of the app is
 	     lazily loaded when it precaches secondary pages -->
 	%sapper.styles%
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap"
+		rel="stylesheet" />
 
 	<!-- This contains the contents of the <svelte:head> component, if
 	     the current page has one -->
