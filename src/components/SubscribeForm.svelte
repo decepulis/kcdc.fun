@@ -30,14 +30,16 @@
   }
 </style>
 
-<form name="subscribe" method="POST" data-netlify="true">
-  <input type="hidden" name="form-name" value="subscribe" />
-  <label for="name">Your Name</label><input type="text" name="name" />
+<form id="subscribe" name="subscribe" method="POST" data-netlify="true">
+  <input type="hidden" id="formname" name="formname" value="subscribe" />
+  <label for="subscribe-name">Your Name</label>
+  <input type="text" id="subscribe-name" name="name" />
 
-  <label for="email">Your Email</label><input type="email" name="email" />
+  <label for="subscribe-email">Your Email</label>
+  <input type="email" id="subscribe-cemail" name="email" />
 
-  <label for="scifi">Star&nbsp;Wars or Star&nbsp;Trek? </label>
-  <select name="scifi">
+  <label for="subscribe-scifi">Star&nbsp;Wars or Star&nbsp;Trek? </label>
+  <select id="subscribe-scifi" name="scifi">
     <option disabled selected value hidden>Choose Wisely...</option>
     <option value="starwars">Star Wars</option>
     <option value="startrek">Star Trek</option>
