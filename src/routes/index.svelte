@@ -24,9 +24,14 @@
     only to the top of the box shadow in the nav bar
     */
     margin-top: calc(-1 * var(--gap));
-    height: calc(100vh - var(--nav-height) + var(--gap));
-    min-height: 75vw;
-    max-height: 160vw;
+
+    --layer-height: calc(100vh - var(--nav-height) + var(--gap));
+    --layer-min-height: 70vw;
+    --layer-max-height: 160vw;
+
+    height: var(--layer-height);
+    min-height: var(--layer-min-height);
+    max-height: var(--layer-max-height);
     background-color: rgb(var(--c1));
 
     position: relative;
@@ -37,9 +42,9 @@
   .parallax-container div {
     position: fixed;
 
-    height: 100vh;
-    min-height: 75vw;
-    max-height: 160vw;
+    height: var(--layer-height);
+    min-height: var(--layer-min-height);
+    max-height: var(--layer-max-height);
 
     background-position: bottom center;
     background-size: cover;
