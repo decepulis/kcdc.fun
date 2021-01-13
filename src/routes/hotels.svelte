@@ -1,6 +1,6 @@
 <style>
     :global(html) {
-        background-color: rgb(var(--c3));
+        background-color: rgb(var(--c4));
     }
 </style>
 

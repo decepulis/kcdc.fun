@@ -5,9 +5,10 @@
     const backgroundsForSegment = {
         // these values correspond to the html background colors
         // defined in each file
-        venue: "var(--c2)",
-        hotels: "var(--c3)",
-        registry: "var(--c4)",
+        rsvp: "var(--c2)",
+        venue: "var(--c3)",
+        hotels: "var(--c4)",
+        registry: "var(--c5)",
     };
 
     $: backgroundColorValue = backgroundsForSegment[segment] ?? "var(--c1)";

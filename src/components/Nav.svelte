@@ -87,6 +87,13 @@
     </li>
     <li>
       <a
+        aria-current={segment === 'rsvp' ? 'page' : undefined}
+        sapper:noscroll
+        rel="prefetch"
+        href="rsvp">rsvp</a>
+    </li>
+    <li>
+      <a
         aria-current={segment === 'venue' ? 'page' : undefined}
         sapper:noscroll
         rel="prefetch"
