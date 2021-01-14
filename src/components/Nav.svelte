@@ -70,9 +70,15 @@
 
     z-index: 1000;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: thin;
+  }
+  @media (pointer: coarse) {
+    /* On touch screens, we hide the scrollbar */
+    nav::-webkit-scrollbar {
+      display: none;
+    }
   }
   nav::before {
     /* 
