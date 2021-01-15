@@ -1,6 +1,5 @@
 <script lang="ts">
   import { spring } from "svelte/motion";
-  import { fade } from "svelte/transition";
 
   import SubscribeForm from "../components/SubscribeForm.svelte";
 
@@ -26,14 +25,10 @@
   {#each layers as layer, layerIndex}
     {#if layerIndex === 0}
       <!-- first layer fixed to 0,0 -->
-      <div
-        in:fade={{ duration: 250, delay: layerIndex * 100 }}
-        style="background-image: url({layer});"
-      />
+      <div style="background-image: url({layer});" />
     {:else if layerIndex !== layers.length - 1}
       <!-- middle layers managed by spring -->
       <div
-        in:fade={{ duration: 250, delay: layerIndex * 100 }}
         style="
           background-image: url({layer});
           transform: translate3d(0,{(-$coords.y *
@@ -43,10 +38,7 @@
       />
     {:else}
       <!-- last layer absolutely attached to scroll -->
-      <div
-        in:fade={{ duration: 250, delay: layerIndex * 100 }}
-        style="background-image: url({layer}); position: absolute;"
-      />
+      <div style="background-image: url({layer}); position: absolute;" />
     {/if}
   {/each}
 </div>
