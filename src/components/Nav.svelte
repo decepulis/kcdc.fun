@@ -54,8 +54,6 @@
   }
 
   nav {
-    padding: 0 var(--gap);
-
     position: fixed;
     top: 0;
     width: 100%;
@@ -119,21 +117,21 @@
     position: fixed;
     z-index: 1001;
     height: calc(var(--nav-height) - var(--gap) + var(--border));
-    width: var(--gap-075);
+    width: var(--gap);
     top: 0;
     /* 
     Of course, once again, we need to use shadows instead of gradients
     because we can't transition gradients but we can shadows
     */
-    box-shadow: 0 0 var(--gap-075) var(--gap-075)
+    box-shadow: 0 0 var(--gap-05) var(--gap-05)
       rgb(var(--background-color, var(--ssr-color)));
     transition: box-shadow var(--page-transition-duration) ease-in-out;
   }
   ul::before {
-    left: calc(-1 * var(--gap-075));
+    left: calc(-1 * var(--gap));
   }
   ul::after {
-    right: calc(-1 * var(--gap-075));
+    right: calc(-1 * var(--gap));
   }
 
   li {
@@ -147,9 +145,8 @@
     color: white;
     opacity: 0.7;
     transition: opacity var(--transition-duration);
-    padding-bottom: var(--border);
-
     padding: var(--gap);
+
     /* increase tap target size */
     margin-bottom: calc(-1 * var(--gap));
   }
