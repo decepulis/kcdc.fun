@@ -54,7 +54,7 @@
 <style>
   :global(html) {
     --ssr-color: var(--c1);
-    background-color: rgb(--ssr-color);
+    background-color: rgb(var(--ssr-color));
   }
 
   .parallax-container {

@@ -8,6 +8,6 @@
 <style>
   :global(html) {
     --ssr-color: var(--c5);
-    background-color: rgb(--ssr-color);
+    background-color: rgb(var(--ssr-color));
   }
 </style>
