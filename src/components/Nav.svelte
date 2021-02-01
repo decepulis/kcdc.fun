@@ -50,11 +50,11 @@
 
 <style>
   :global(:root) {
-    --nav-height: calc(1rem + var(--gap-2));
+    --nav-height: calc(1rem + var(--gap-3));
   }
 
   nav {
-    padding: 0 var(--gap-half);
+    padding: 0 var(--gap);
 
     position: fixed;
     top: 0;
@@ -118,22 +118,22 @@
     content: "";
     position: fixed;
     z-index: 1001;
-    height: calc(var(--nav-height) - var(--gap) + 2px);
-    width: var(--gap);
+    height: calc(var(--nav-height) - var(--gap) + var(--border));
+    width: var(--gap-075);
     top: 0;
     /* 
     Of course, once again, we need to use shadows instead of gradients
     because we can't transition gradients but we can shadows
     */
-    box-shadow: 0 0 var(--gap-half) var(--gap-half)
+    box-shadow: 0 0 var(--gap-075) var(--gap-075)
       rgb(var(--background-color, var(--ssr-color)));
     transition: box-shadow var(--page-transition-duration) ease-in-out;
   }
   ul::before {
-    left: calc(-1 * var(--gap));
+    left: calc(-1 * var(--gap-075));
   }
   ul::after {
-    right: calc(-1 * var(--gap));
+    right: calc(-1 * var(--gap-075));
   }
 
   li {
@@ -147,9 +147,9 @@
     color: white;
     opacity: 0.7;
     transition: opacity var(--transition-duration);
-    padding-bottom: 2px;
+    padding-bottom: var(--border);
 
-    padding: var(--gap) var(--gap-half);
+    padding: var(--gap);
     /* increase tap target size */
     margin-bottom: calc(-1 * var(--gap));
   }
@@ -157,13 +157,17 @@
   a::after {
     position: absolute;
     content: "";
-    width: calc(100% - var(--gap));
-    height: 2px;
+    width: calc(100% - var(--gap-2));
+    height: var(--border);
     background-color: rgb(var(--cx));
     display: block;
     bottom: var(--gap);
-    opacity: 0;
-    transition: opacity var(--transition-duration);
+
+    opacity: 0.85;
+    transform: scaleX(0);
+    transform-origin: 0 0;
+    transition: opacity var(--transition-duration),
+      transform var(--transition-duration);
   }
 
   a:hover {
@@ -171,6 +175,7 @@
   }
   a:hover::after {
     opacity: 0.85;
+    transform: scaleX(1);
   }
 
   a[aria-current] {
@@ -178,5 +183,6 @@
   }
   a[aria-current]::after {
     opacity: 1;
+    transform: scaleX(1);
   }
 </style>
