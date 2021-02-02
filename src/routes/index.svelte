@@ -96,7 +96,8 @@
 
   .content {
     position: relative;
-    min-height: calc(100vh - var(--gap-2));
+    min-height: calc(100vh - var(--gap-2) - var(--nav-height));
+    margin-bottom: calc(-1 * var(--nav-height));
     background-color: rgb(var(--c1));
     /* 
     opt out of global grid
