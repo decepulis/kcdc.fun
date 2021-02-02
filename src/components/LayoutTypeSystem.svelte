@@ -1,6 +1,6 @@
 <style>
   :global(html) {
-    font-size: 90%;
+    font-size: 100%;
   }
 
   :global(body) {
