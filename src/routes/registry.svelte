@@ -87,7 +87,11 @@
   cause that couldn't be more important to us personally, especially during a
   time like a global pandemic.
 </p>
-<RegistryList wider>
+<p>
+  We would be absolutely thrilled if you chose to make a donation in our name as
+  a present to us.
+</p>
+<RegistryList>
   <RegistryListItem>
     <h3>Earthworks</h3>
     <RegistryListItemFooter>
@@ -143,6 +147,17 @@
       >
         Donate
       </Button>
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
+    <h3>Native American Rights Fund</h3>
+    <RegistryListItemFooter>
+      <Button
+        href="https://www.charitywatch.org/charities/native-american-rights-fund"
+      >
+        Learn More
+      </Button>
+      <Button href="https://secure.narf.org/page/64457/donate/1">Donate</Button>
     </RegistryListItemFooter>
   </RegistryListItem>
 </RegistryList>

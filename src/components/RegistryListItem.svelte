@@ -4,16 +4,20 @@
 
 <style>
   li {
-    max-width: var(--content-width);
-
     display: flex;
     flex-direction: column;
   }
 
-  li > :global(*:first-child) {
-    margin-top: 0;
+  li > :global(h1),
+  li > :global(h2),
+  li > :global(h3),
+  li > :global(h4),
+  li > :global(h5),
+  li > :global(h6) {
+    text-align: center;
   }
-  li > :global(*:last-child) {
-    margin-bottom: 0;
+
+  li > :global(footer) {
+    text-align: center;
   }
 </style>

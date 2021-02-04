@@ -9,16 +9,18 @@
 <style>
   ul {
     list-style-type: none;
-    margin: var(--gap) 0;
-    padding: 0 var(--gap-2);
+    margin: 0;
+    padding: 0 var(--gap);
     grid-column: fullpage-start / fullpage-end;
 
-    display: grid;
-    gap: var(--gap-2);
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--content-width-05), max-content)
-    );
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+  }
+  ul > :global(*) {
+    flex: 1;
+    padding: 0 var(--gap);
+    min-width: calc(var(--content-width) / 2);
+    max-width: var(--content-width);
   }
 </style>
