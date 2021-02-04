@@ -51,6 +51,7 @@
 
   :global(h3) {
     font-size: 1.953rem;
+    font-style: italic;
   }
 
   :global(h4) {
@@ -65,7 +66,19 @@
   :global(.text_small) {
     font-size: 0.8rem;
   }
-  @media (max-width: 42rem) {
+  @media (max-width: 672px) {
+    /* 
+    content width is 42rem
+    I set the breakpoint at 672px because
+    that's 42*16.
+    I didn't use 42rem in the media query
+    because rem actually changes in the html tag
+    down below.
+    */
+    :global(html) {
+      font-size: 100%;
+    }
+
     :global(h1) {
       margin-top: 0;
       font-size: 1.802rem;

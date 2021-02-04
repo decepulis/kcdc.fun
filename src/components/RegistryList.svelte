@@ -21,10 +21,4 @@
     );
     justify-content: center;
   }
-  ul.wider {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--content-width), max-content)
-    );
-  }
 </style>
