@@ -10,6 +10,9 @@
   let L4 = "img/layers/L4.svg";
   let BG = "img/layers/L5.png";
   const layers = [BG, L4, L3, L2, L1, L0];
+  const layerFactors = layers.map((__, index) =>
+    Math.pow(index / (layers.length - 1), 1.5)
+  );
 
   let scrollY: number;
   let coords = spring({ y: 0 }, { stiffness: 0.2, damping: 1 });
@@ -31,9 +34,8 @@
       <div
         style="
           background-image: url({layer});
-          transform: translate3d(0,{(-$coords.y *
-          layerIndex) /
-          (layers.length - 1)}px,0)
+          transform: translate3d(0,{-$coords.y *
+          layerFactors[layerIndex]}px,0);
         "
       />
     {:else}
@@ -96,7 +98,8 @@
 
   .content {
     position: relative;
-    min-height: calc(100vh - var(--gap-2));
+    min-height: calc(100vh - var(--gap-2) - var(--nav-height));
+    margin-bottom: calc(-1 * var(--nav-height));
     background-color: rgb(var(--c1));
     /* 
     opt out of global grid

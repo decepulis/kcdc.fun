@@ -34,7 +34,7 @@
 
 <style>
   main {
-    padding-top: var(--nav-height);
+    padding: var(--nav-height) 0;
     min-height: 100vh;
 
     min-width: var(--min-page-width);

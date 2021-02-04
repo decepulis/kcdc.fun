@@ -4,8 +4,6 @@
 
 <style>
   li {
-    border: var(--border) solid white;
-    padding: var(--gap);
     max-width: var(--content-width);
 
     display: flex;
