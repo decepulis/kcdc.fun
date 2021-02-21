@@ -1,14 +1,13 @@
 <script lang="ts">
-  export let type: string;
-  export let href: string;
+  export let href: string | undefined = undefined;
 </script>
 
 {#if typeof href === "undefined"}
-  <button {type}>
+  <button {...$$props}>
     <slot />
   </button>
 {:else}
-  <a {type} {href}>
+  <a {...$$props} {href}>
     <slot />
   </a>
 {/if}

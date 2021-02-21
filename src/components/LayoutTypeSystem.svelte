@@ -67,7 +67,7 @@
     font-size: 0.8rem;
   }
   @media (max-width: 672px) {
-    /* 
+    /*
     content width is 42rem
     I set the breakpoint at 672px because
     that's 42*16.

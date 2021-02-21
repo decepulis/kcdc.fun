@@ -1,14 +1,15 @@
 <script lang="ts">
   import { spring } from "svelte/motion";
 
-  import SubscribeForm from "../components/SubscribeForm.svelte";
+  import Form from "../components/Form.svelte";
+  import Button from "../components/Button.svelte";
 
   let L0 = "img/layers/L0.svg";
   let L1 = "img/layers/L1.svg";
   let L2 = "img/layers/L2.svg";
   let L3 = "img/layers/L3.svg";
   let L4 = "img/layers/L4.svg";
-  let BG = "img/layers/L5.png";
+  let BG = "img/layers/L5.jpg";
   const layers = [BG, L4, L3, L2, L1, L0];
   const layerFactors = layers.map((__, index) =>
     Math.pow(index / (layers.length - 1), 1.5)
@@ -48,9 +49,6 @@
 <section class="content">
   <h1>Kristin and Darius are getting married!</h1>
   <p><i>Watch this space for updates.</i></p>
-  <h2>Can't wait to hear the latest?</h2>
-
-  <SubscribeForm />
 </section>
 
 <style>
@@ -60,7 +58,7 @@
   }
 
   .parallax-container {
-    /* 
+    /*
     We don't want the container to go
     all the way to the top of the page;
     only to the top of the box shadow in the nav bar
@@ -101,13 +99,13 @@
     min-height: calc(100vh - var(--gap-2) - var(--nav-height));
     margin-bottom: calc(-1 * var(--nav-height));
     background-color: rgb(var(--c1));
-    /* 
+    /*
     opt out of global grid
     to show background color around content.
     center will make it look pretty
     */
     grid-column: fullpage-start / fullpage-end;
-    padding: var(--gap);
+    padding: var(--gap) var(--gap) var(--nav-height);
     text-align: center;
   }
 

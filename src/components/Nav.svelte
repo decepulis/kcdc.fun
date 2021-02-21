@@ -79,9 +79,9 @@
     }
   }
   nav::before {
-    /* 
+    /*
     Background and gradient for nav:
-    We do it here in a fixed :before so that the box shadow 
+    We do it here in a fixed :before so that the box shadow
     could exist inside the nav where we visually want it...
     without any of the weird css behavior that comes in
     when horizontal scroll happens
@@ -109,7 +109,7 @@
   }
   ul::before,
   ul:after {
-    /* 
+    /*
     Here's little gradients at the left and right side of the nav
     that indicate there's more to scroll
     */
@@ -119,7 +119,7 @@
     height: calc(var(--nav-height) - var(--gap) + var(--border));
     width: var(--gap);
     top: 0;
-    /* 
+    /*
     Of course, once again, we need to use shadows instead of gradients
     because we can't transition gradients but we can shadows
     */
