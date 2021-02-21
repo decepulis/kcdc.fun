@@ -3,7 +3,16 @@
 </svelte:head>
 
 <h1>Venue</h1>
-<p><i>Coming Soon...</i></p>
+<p>
+  <img
+    src="img/figures/venue.png"
+    alt="A cute couple dances under the disco ball"
+    class="p-img"
+  />
+</p>
+<p>
+  <i>Coming Soon...</i>
+</p>
 
 <style>
   :global(html) {

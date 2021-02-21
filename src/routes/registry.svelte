@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Button from "../components/Button.svelte";
   import RegistryList from "../components/RegistryList.svelte";
   import RegistryListItem from "../components/RegistryListItem.svelte";
@@ -8,12 +8,16 @@
 <svelte:head>
   <title>Kristin & Darius | Registry</title>
 </svelte:head>
-
 <h1>Registry</h1>
 <p>
+  <img
+    src="img/figures/registry.png"
+    alt="A cute couple; one hands a gift to the other, who responds with a heart"
+    class="p-img float-left"
+  />
   Most of you know that Kristin and I are indecisive and not very good at making
-  wishlists. Which is why it probably won't surprise you to learn that we've
-  made four registries.
+  wishlists. Which is why it probably won't surprise you to learn that we've made
+  four registries.
 </p>
 <h2>Misfit Kitchenware</h2>
 <p>Nothing in our kitchen matches. And we love it.</p>
@@ -26,8 +30,13 @@
 </p>
 <h2>Building Towards Our Goals</h2>
 <p>
-  We live in a pretty small apartment and already have so much of what we need.
-  Not to mention the fact that we don't have space for too much else!
+  <img
+    src="img/figures/home.png"
+    alt="A cute couple with their pup, proudly standing next to their new house."
+    class="p-img float-right"
+  />
+  We live in a pretty small apartment and already have so much of what we need. Not
+  to mention the fact that we don't have space for too much else!
 </p>
 <p>
   If you'd like, instead of going the more traditional registry route, you can
@@ -73,14 +82,22 @@
   </RegistryListItem>
 </RegistryList>
 <h2>Normal Gifts</h2>
-<p>Yes, we have a normal registry too! Because we knew you'd ask.</p>
 <p>
+  <img
+    src="img/figures/rei.png"
+    alt="A cute couple; one helps the other over the mountaintop"
+    class="p-img float-left"
+  />
+  Yes, we have a normal registry too! Because we knew you'd ask. (And we always love
+  surprises, too.)
+  <br />
+  <br />
   <Button
     href="https://www.myregistry.com/wedding-registry/kristin-bradford-and-darius-epulis-forest-park-il/2725605/giftlist"
-    >Go To Registry</Button
   >
+    Go To Registry
+  </Button>
 </p>
-<p>And we always love surprises, too.</p>
 <h2>Donations</h2>
 <p>
   Below are a few causes that Kristin and I have given to. Each one represents a
