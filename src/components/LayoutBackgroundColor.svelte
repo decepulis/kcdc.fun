@@ -6,9 +6,8 @@
     // these values correspond to the html background colors
     // defined in each file
     rsvp: "var(--c2)",
-    venue: "var(--c3)",
-    hotels: "var(--c4)",
-    registry: "var(--c5)",
+    attendees: "var(--c3)",
+    registry: "var(--c4)",
   };
 
   $: backgroundColorValue = backgroundsForSegment[segment] ?? "var(--c1)";

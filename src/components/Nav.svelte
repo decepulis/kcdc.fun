@@ -13,28 +13,20 @@
         href=".">kcdc</a
       >
     </li>
-    <!-- <li>
+    <li>
       <a
         aria-current={segment === "rsvp" ? "page" : undefined}
         sapper:noscroll
         rel="prefetch"
         href="rsvp">rsvp</a
       >
-    </li> -->
-    <li>
-      <a
-        aria-current={segment === "venue" ? "page" : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="venue">venue</a
-      >
     </li>
     <li>
       <a
-        aria-current={segment === "hotels" ? "page" : undefined}
+        aria-current={segment === "attendees" ? "page" : undefined}
         sapper:noscroll
         rel="prefetch"
-        href="hotels">hotels</a
+        href="attendees">attendees</a
       >
     </li>
     <li>

@@ -13,7 +13,7 @@
   <img
     src="img/figures/registry.png"
     alt="A cute couple; one hands a gift to the other, who responds with a heart"
-    class="p-img float-left"
+    class="p-img p-img-150 float-left"
   />
   Most of you know that Kristin and I are indecisive and not very good at making
   wishlists. Which is why it probably won't surprise you to learn that we've made
@@ -86,18 +86,54 @@
   <img
     src="img/figures/rei.png"
     alt="A cute couple; one helps the other over the mountaintop"
-    class="p-img float-left"
+    class="p-img p-img-150 float-left"
   />
-  Yes, we have a normal registry too! Because we knew you'd ask. (And we always love
-  surprises, too.)
-  <br />
-  <br />
-  <Button
-    href="https://www.myregistry.com/wedding-registry/kristin-bradford-and-darius-epulis-forest-park-il/2725605/giftlist"
-  >
-    Go To Registry
-  </Button>
+  Yes, we have a normal registry, too! Well, maybe a few. Narrowing down options
+  is hard, okay?? (Of course, we always love surprises, too.)
 </p>
+<RegistryList>
+  <RegistryListItem>
+    <h3>REI</h3>
+    <RegistryListItemFooter>
+      <Button
+        href="https://www.myregistry.com/rei/wedding-registry/kristin-bradford-and-darius-epulis-forest-park-il/2725605"
+        >View</Button
+      >
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
+    <h3>Target</h3>
+    <RegistryListItemFooter>
+      <Button
+        href="https://www.target.com/gift-registry/giftgiver?registryId=6ef5f4634d554735885b4abe1dccf5d3"
+        >View</Button
+      >
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
+    <h3>EarthHero</h3>
+    <RegistryListItemFooter>
+      <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
+        >View</Button
+      >
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
+    <h3>Bed Bath & Beyond</h3>
+    <RegistryListItemFooter>
+      <Button
+        href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
+        >View</Button
+      >
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
+    <h3>MadeTrade</h3>
+    <RegistryListItemFooter>
+      <Button href="https://www.madetrade.com/pages/gift-registry">View</Button>
+    </RegistryListItemFooter>
+  </RegistryListItem>
+</RegistryList>
 <h2>Donations</h2>
 <p>
   Below are a few causes that Kristin and I have given to. Each one represents a
@@ -181,7 +217,7 @@
 
 <style>
   :global(html) {
-    --ssr-color: var(--c5);
+    --ssr-color: var(--c4);
     background-color: rgb(var(--ssr-color));
   }
 

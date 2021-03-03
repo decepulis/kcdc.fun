@@ -1,8 +1,7 @@
 <script lang="ts">
   import { spring } from "svelte/motion";
 
-  import Form from "../components/Form.svelte";
-  import Button from "../components/Button.svelte";
+  import CountdownTimer from "../components/CountdownTimer.svelte";
 
   let L0 = "img/layers/L0.svg";
   let L1 = "img/layers/L1.svg";
@@ -48,7 +47,27 @@
 
 <section class="content">
   <h1>Kristin and Darius are getting married!</h1>
-  <p><i>Watch this space for updates.</i></p>
+  <p>
+    <i>May 8, 2021</i>
+    <br />
+    <CountdownTimer utcHours={22} utcDate={8} utcMonth={5} utcYear={2021} />
+  </p>
+  <h2>An Update</h2>
+  <p>
+    Sadly, due to COVID-19, we have to move forward with our wedding at a
+    reduced capacity. We expect the current Illinois restrictions to still be in
+    effect by May 8th, so we are limiting our guest list to a small number.
+  </p>
+  <p>
+    We hope that you’ll still be able to join us via our online ceremony. More
+    information will be available here on the day of the wedding.
+  </p>
+  <p>
+    We desperately wish we could invite everyone, and are so terribly sorry it
+    hasn’t worked out that way. We do, however, still look forward to
+    celebrating with you when conditions improve. Until then, we hope you stay
+    safe and well, and know that our thoughts and hearts are with you.
+  </p>
 </section>
 
 <style>
@@ -97,16 +116,24 @@
   .content {
     position: relative;
     min-height: calc(100vh - var(--gap-2) - var(--nav-height));
-    margin-bottom: calc(-1 * var(--nav-height));
-    background-color: rgb(var(--c1));
+
+    padding-top: var(--gap);
+
     /*
-    opt out of global grid
-    to show background color around content.
-    center will make it look pretty
+    We use negative margins to show
+    the background color around the content
+     */
+    background-color: rgb(var(--background-color, var(--ssr-color)));
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
+
+    /*
+    And to make sure we have some room at the bottom
     */
-    grid-column: fullpage-start / fullpage-end;
-    padding: var(--gap) var(--gap) var(--nav-height);
-    text-align: center;
+    padding-bottom: var(--nav-height);
+    margin-bottom: calc(-1 * var(--nav-height));
   }
 
   .content h1 {

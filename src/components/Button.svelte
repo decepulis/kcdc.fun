@@ -1,13 +1,14 @@
 <script lang="ts">
   export let href: string | undefined = undefined;
+  export let disabled = false;
 </script>
 
-{#if typeof href === "undefined"}
-  <button {...$$props}>
+{#if typeof href === "undefined" || disabled}
+  <button class:disabled {disabled} {...$$props}>
     <slot />
   </button>
 {:else}
-  <a {...$$props} {href}>
+  <a class:disabled {...$$props} {href}>
     <slot />
   </a>
 {/if}
@@ -15,12 +16,15 @@
 <style>
   a,
   button {
+    --color: white;
     padding: var(--gap-05);
     background: none;
     cursor: pointer;
-    border: var(--border) solid white;
+    border: var(--border) solid var(--color);
     color: inherit;
     font-family: inherit;
+    font-size: 1em;
+    line-height: inherit;
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -29,12 +33,18 @@
     position: relative;
     z-index: 1;
 
-    color: white;
+    color: var(--color);
     text-decoration: none;
     transition: color var(--transition-duration);
   }
 
-  a:after {
+  .disabled {
+    cursor: auto;
+    border-style: dotted;
+    /* --color: rgba(255, 255, 255, 0.8); */
+  }
+
+  a:not(.disabled):after {
     content: " \203A";
   }
 
@@ -54,12 +64,12 @@
     transition: transform var(--transition-duration);
   }
 
-  a:hover,
-  button:hover {
+  a:not(.disabled):hover,
+  button:not(.disabled):hover {
     color: rgb(var(--c1));
   }
-  a:hover:before,
-  button:hover:before {
+  a:not(.disabled):hover:before,
+  button:not(.disabled):hover:before {
     transform: scaleX(1);
   }
 </style>

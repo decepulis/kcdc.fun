@@ -39,7 +39,7 @@
   <img
     src="img/figures/rsvp.png"
     alt="A cute couple; he puts letters into a mailbox; she chases their dog running away with one"
-    class="p-img"
+    class="p-img p-img-200"
   />
 </p>
 <Form

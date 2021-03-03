@@ -9,6 +9,15 @@
     line-height: 1.75;
     color: #ffffff;
   }
+  :global(a) {
+    color: inherit;
+    text-decoration-style: solid;
+    /* text-decoration-color: rgb(var(--cx)); */
+    text-decoration-thickness: var(--border);
+  }
+  :global(a:hover) {
+    text-decoration-style: wavy;
+  }
 
   :global(*) {
     /*
@@ -66,19 +75,7 @@
   :global(.text_small) {
     font-size: 0.8rem;
   }
-  @media (max-width: 672px) {
-    /*
-    content width is 42rem
-    I set the breakpoint at 672px because
-    that's 42*16.
-    I didn't use 42rem in the media query
-    because rem actually changes in the html tag
-    down below.
-    */
-    :global(html) {
-      font-size: 100%;
-    }
-
+  @media (max-width: 42rem) {
     :global(h1) {
       margin-top: 0;
       font-size: 1.802rem;

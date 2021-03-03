@@ -54,13 +54,20 @@
   }
 
   :global(.p-img) {
-    width: 225px;
+    height: 100px;
+    width: auto;
     padding-left: var(--gap);
     padding-right: var(--gap);
     margin-bottom: var(--gap);
   }
+  :global(.p-img-150) {
+    height: 150px;
+  }
+  :global(.p-img-200) {
+    height: 200px;
+  }
 
-  @media (max-width: 500px) {
+  @media (max-width: 42rem) {
     :global(.p-img) {
       float: none;
       display: block;
