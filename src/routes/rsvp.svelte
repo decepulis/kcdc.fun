@@ -81,56 +81,63 @@
   </li>
 </ul>
 <h2>RSVP</h2>
-<Form
-  id="rsvp"
-  name="rsvp"
-  method="POST"
-  data-netlify="true"
-  on:submit={handleOnSubmit}
->
-  <input type="hidden" id="formname" name="formname" value="rsvp" />
+<Form method="POST" netlify name="rsvp" onSubmit={handleOnSubmit}>
+  <input type="hidden" name="form-name" value="rsvp" />
 
   <label for="rsvp-name">Your codebird</label>
   <input type="text" id="rsvp-name" name="name" bind:value={codeBird} />
 
-  {#if typeof codeBirdEntry !== "undefined"}
-    <div class="span-2 is-attending">
-      <div>
-        <input
-          type="radio"
-          id={isAttendingTrue}
-          name="is-attending"
-          value={isAttendingTrue}
-          bind:group={isAttendingGroup}
-        />
-        <label for={isAttendingTrue}>Attending!</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id={isAttendingFalse}
-          name="is-attending"
-          value={isAttendingFalse}
-          bind:group={isAttendingGroup}
-        />
-        <label for={isAttendingFalse}>Not Attending!</label>
-      </div>
+  <div
+    class="span-2 is-attending"
+    class:d-none={typeof codeBirdEntry === "undefined"}
+  >
+    <div>
+      <input
+        type="radio"
+        id={isAttendingTrue}
+        name="is-attending"
+        value={isAttendingTrue}
+        bind:group={isAttendingGroup}
+      />
+      <label for={isAttendingTrue}>Attending!</label>
     </div>
-  {/if}
+    <div>
+      <input
+        type="radio"
+        id={isAttendingFalse}
+        name="is-attending"
+        value={isAttendingFalse}
+        bind:group={isAttendingGroup}
+      />
+      <label for={isAttendingFalse}>Not Attending!</label>
+    </div>
+  </div>
 
-  {#if isAttending && maxGuestCount > 1}
-    <label for="rsvp-guest-count">How many guests are coming?</label>
-    <select id="rsvp-guest-count" name="guest-count" bind:value={guestCount}>
+  <label
+    for="rsvp-guest-count"
+    class:d-none={!isAttending || maxGuestCount <= 1}
+  >
+    How many guests are coming?
+  </label>
+  <select
+    id="rsvp-guest-count"
+    name="guest-count"
+    bind:value={guestCount}
+    class:d-none={!isAttending || maxGuestCount <= 1}
+  >
+    {#if maxGuestCount > 1}
       <option disabled selected value="">-</option>
       {#each [...Array(codeBirdEntry.maxGuests).keys()] as number}
         <option value={number + 1}>{number + 1}</option>
       {/each}
-    </select>
-  {/if}
+    {:else}
+      <option selected value="1">1</option>
+    {/if}
+  </select>
 
-  {#if isFormValid}
-    <Button type="submit" class="span-2">RSVP</Button>
-  {/if}
+  <Button type="submit" class={`span-2 ${!isFormValid ? "d-none" : ""}`}>
+    RSVP
+  </Button>
 </Form>
 
 <style>

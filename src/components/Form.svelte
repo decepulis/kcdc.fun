@@ -1,4 +1,15 @@
-<form {...$$props}>
+<script lang="ts">
+  // There's gotta be a better pattern for just "allow all the same props as form"
+  // that's not just {...$$props}
+  export let onSubmit:
+    | svelte.JSX.FormEventHandler<HTMLFormElement>
+    | undefined = undefined;
+  export let method: string | undefined = undefined;
+  export let name: string | undefined = undefined;
+  export let netlify: boolean | undefined = undefined;
+</script>
+
+<form on:submit={onSubmit} {method} {name} {netlify}>
   <slot />
 </form>
 
@@ -35,6 +46,7 @@
   :global(form select) {
     background: none;
     appearance: none;
+    -webkit-appearance: none;
     padding: var(--gap-05);
     border: var(--border) solid white;
     border-radius: 0;

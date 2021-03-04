@@ -24,6 +24,6 @@
     max-width: var(--content-width);
   }
   ul.smol > :global(*) {
-    min-width: calc(var(--content-width) / 4);
+    min-width: calc(var(--content-width) / 3.5);
   }
 </style>

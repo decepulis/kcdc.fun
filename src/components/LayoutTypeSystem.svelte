@@ -53,24 +53,29 @@
     line-height: 1.3;
   }
 
-  :global(h1) {
+  :global(h1),
+  :global(.h1) {
     font-size: 2.488rem;
   }
 
-  :global(h2) {
+  :global(h2),
+  :global(.h2) {
     font-size: 2.441rem;
   }
 
-  :global(h3) {
+  :global(h3),
+  :global(.h3) {
     font-size: 1.953rem;
     font-style: italic;
   }
 
-  :global(h4) {
+  :global(h4),
+  :global(.h4) {
     font-size: 1.563rem;
   }
 
-  :global(h5) {
+  :global(h5),
+  :global(.h5) {
     font-size: 1.25rem;
   }
 

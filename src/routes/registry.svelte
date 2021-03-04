@@ -93,7 +93,7 @@
 </p>
 <RegistryList smol>
   <RegistryListItem>
-    <h3>REI</h3>
+    <h3 class="h5">REI</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.myregistry.com/rei/wedding-registry/kristin-bradford-and-darius-epulis-forest-park-il/2725605"
@@ -102,7 +102,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Target</h3>
+    <h3 class="h5">Target</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.target.com/gift-registry/giftgiver?registryId=6ef5f4634d554735885b4abe1dccf5d3"
@@ -111,7 +111,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Bed Bath<br />& Beyond</h3>
+    <h3 class="h5">Bed Bath<br />& Beyond</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
@@ -120,7 +120,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>EarthHero</h3>
+    <h3 class="h5">EarthHero</h3>
     <RegistryListItemFooter>
       <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
         >View</Button
@@ -128,7 +128,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>MadeTrade</h3>
+    <h3 class="h5">MadeTrade</h3>
     <RegistryListItemFooter>
       <Button href="https://www.madetrade.com/pages/gift-registry">View</Button>
     </RegistryListItemFooter>
@@ -146,7 +146,7 @@
 </p>
 <RegistryList>
   <RegistryListItem>
-    <h3>Earthworks</h3>
+    <h3 class="h5">Earthworks</h3>
     <RegistryListItemFooter>
       <Button href="https://www.charitywatch.org/charities/earthworks">
         Learn More
@@ -155,7 +155,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Breast Cancer<br />Research Foundation</h3>
+    <h3 class="h5">Breast Cancer<br />Research Foundation</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/breast-cancer-research-foundation"
@@ -166,7 +166,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>American Civil<br />Liberties Union</h3>
+    <h3 class="h5">American Civil<br />Liberties Union</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/american-civil-liberties-union-aclu"
@@ -177,7 +177,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>National Alliance to End Homelessness</h3>
+    <h3 class="h5">National Alliance to End Homelessness</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/national-alliance-to-end-homelessness"
@@ -188,7 +188,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Action Against<br />Hunger</h3>
+    <h3 class="h5">Action Against<br />Hunger</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/action-against-hunger-usa"
@@ -203,7 +203,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Native American<br />Rights Fund</h3>
+    <h3 class="h5">Native American<br />Rights Fund</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/native-american-rights-fund"

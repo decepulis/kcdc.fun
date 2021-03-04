@@ -1,14 +1,19 @@
 <script lang="ts">
+  // There's gotta be a better pattern for just "allow all the same props as button"
+  // that's not just {...$$props}
+  let className: string | undefined = undefined;
+  export { className as class };
   export let href: string | undefined = undefined;
   export let disabled = false;
+  export let type: string | undefined = undefined;
 </script>
 
 {#if typeof href === "undefined" || disabled}
-  <button class:disabled {disabled} {...$$props}>
+  <button class:disabled {disabled} {type} class={className}>
     <slot />
   </button>
 {:else}
-  <a class:disabled {...$$props} {href}>
+  <a class:disabled {href} class={className}>
     <slot />
   </a>
 {/if}
