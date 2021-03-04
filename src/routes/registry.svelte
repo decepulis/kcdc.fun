@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>Kristin & Darius | Registry</title>
+  <title>kcdc | Registry</title>
 </svelte:head>
 <h1>Registry</h1>
 <p>
@@ -91,7 +91,7 @@
   Yes, we have a normal registry, too! Well, maybe a few. Narrowing down options
   is hard, okay?? (Of course, we always love surprises, too.)
 </p>
-<RegistryList>
+<RegistryList smol>
   <RegistryListItem>
     <h3>REI</h3>
     <RegistryListItemFooter>
@@ -111,18 +111,18 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>EarthHero</h3>
+    <h3>Bed Bath<br />& Beyond</h3>
     <RegistryListItemFooter>
-      <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
+      <Button
+        href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
         >View</Button
       >
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Bed Bath & Beyond</h3>
+    <h3>EarthHero</h3>
     <RegistryListItemFooter>
-      <Button
-        href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
+      <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
         >View</Button
       >
     </RegistryListItemFooter>
@@ -155,7 +155,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Breast Cancer Research Foundation</h3>
+    <h3>Breast Cancer<br />Research Foundation</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/breast-cancer-research-foundation"
@@ -166,7 +166,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>American Civil Liberties Union</h3>
+    <h3>American Civil<br />Liberties Union</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/american-civil-liberties-union-aclu"
@@ -188,7 +188,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Action Against Hunger</h3>
+    <h3>Action Against<br />Hunger</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/action-against-hunger-usa"
@@ -203,7 +203,7 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
-    <h3>Native American Rights Fund</h3>
+    <h3>Native American<br />Rights Fund</h3>
     <RegistryListItemFooter>
       <Button
         href="https://www.charitywatch.org/charities/native-american-rights-fund"

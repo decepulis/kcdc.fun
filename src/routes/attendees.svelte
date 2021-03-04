@@ -3,11 +3,9 @@
 </script>
 
 <svelte:head>
-  <title>Kristin & Darius | Attendees</title>
+  <title>kcdc | Attendees</title>
 </svelte:head>
 
-<h1>Attendees</h1>
-<p><i>Everything you need to know about our big weekend</i></p>
 <h2>Accommodations</h2>
 <p>
   <img

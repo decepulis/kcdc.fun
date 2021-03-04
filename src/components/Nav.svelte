@@ -96,6 +96,7 @@
   ul {
     margin: 0;
     padding: 0;
+    padding: 0 env(safe-area-inset-left) 0 env(safe-area-inset-right);
 
     display: flex;
   }

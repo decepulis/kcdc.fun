@@ -1,4 +1,4 @@
-<!-- 
+<!--
 	Transitions between segments
 	Scrolls to top in middle of transition
 	Establishes grid
@@ -35,6 +35,8 @@
 <style>
   main {
     padding: var(--nav-height) 0;
+    padding: var(--nav-height) 0
+      max(var(--nav-height), env(safe-area-inset-bottom));
     min-height: 100vh;
 
     min-width: var(--min-page-width);
@@ -47,6 +49,16 @@
       minmax(0, var(--content-width))
       [main-end]
       minmax(var(--gap), 1fr)
+      [fullpage-end];
+
+    /* iOS */
+    grid-template-columns:
+      [fullpage-start]
+      minmax(max(env(safe-area-inset-left), var(--gap)), 1fr)
+      [main-start]
+      minmax(0, var(--content-width))
+      [main-end]
+      minmax(max(env(safe-area-inset-right), var(--gap)), 1fr)
       [fullpage-end];
   }
 

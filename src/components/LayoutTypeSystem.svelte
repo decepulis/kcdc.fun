@@ -13,7 +13,7 @@
     color: inherit;
     text-decoration-style: solid;
     /* text-decoration-color: rgb(var(--cx)); */
-    text-decoration-thickness: var(--border);
+    /* text-decoration-thickness: var(--border); */
   }
   :global(a:hover) {
     text-decoration-style: wavy;
@@ -31,8 +31,11 @@
     margin-top: 0;
   }
 
-  :global(p) {
+  :global(p, ul) {
     margin-bottom: var(--gap);
+  }
+  :global(li) {
+    margin-bottom: var(--gap-05);
   }
 
   :global(h1),

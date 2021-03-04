@@ -7,6 +7,7 @@
     --gap-2: calc(var(--gap) * 2);
     --gap-15: calc(var(--gap) * 1.5);
     --gap-3: calc(var(--gap) * 3);
+    --gap-4: calc(var(--gap) * 4);
 
     --border: 2px;
 

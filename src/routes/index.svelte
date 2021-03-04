@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-  <title>Kristin & Darius</title>
+  <title>kcdc</title>
 </svelte:head>
 <svelte:window bind:scrollY />
 
@@ -68,6 +68,8 @@
     celebrating with you when conditions improve. Until then, we hope you stay
     safe and well, and know that our thoughts and hearts are with you.
   </p>
+  <p>With love,</p>
+  <p><i>&ndash;&nbsp;kcdc</i></p>
 </section>
 
 <style>

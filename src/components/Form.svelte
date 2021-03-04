@@ -6,6 +6,7 @@
   form {
     width: 100%;
     margin: 0 auto;
+    margin-bottom: var(--gap);
 
     display: grid;
     grid-template-columns: 150px 1fr;

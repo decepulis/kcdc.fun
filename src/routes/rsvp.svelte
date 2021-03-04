@@ -31,17 +31,56 @@
 </script>
 
 <svelte:head>
-  <title>Kristin & Darius | RSVP</title>
+  <title>kcdc | RSVP</title>
 </svelte:head>
 
-<h1>RSVP</h1>
 <p>
   <img
     src="img/figures/rsvp.png"
     alt="A cute couple; he puts letters into a mailbox; she chases their dog running away with one"
-    class="p-img p-img-200"
+    class="p-img p-img-150"
   />
 </p>
+<h2>COVID Guidelines</h2>
+<p>
+  As of the beginning of March, despite being on the decline, COVID-19 cases are
+  still at similar levels to last summer's peak. We are aware that the pandemic
+  is far from over, and we intend to take every precaution necessary to ensure
+  the safety of you, our guests.
+</p>
+<p>
+  To that end, we would like to share the safeguards and guidelines we have
+  established for our event. Please take the time to carefully review them
+  before making an informed decision about your RSVP. We understand this is a
+  challenging time and are happy to answer any questions you might have.
+</p>
+<ul>
+  <li>
+    <i>Vaccinations</i> &mdash; We encourage everyone who has any COVID-19 vaccine
+    available to them to be vaccinated. Please remember that vaccines take about
+    two weeks to build full immunity.
+  </li>
+  <li>
+    <i>Testing</i> &mdash; We ask that all who don't yet have access to the vaccine
+    to take a COVID-19 test in the days leading up to the wedding, and to minimize
+    contact between the test and the event.
+  </li>
+  <li>
+    <i>Masks</i> &mdash; We request that you keep your mask on for the duration of
+    the event, unless eating or drinking. When not wearing your mask, please stay
+    with members of your own household.
+  </li>
+  <li>
+    <i>Ventilation</i> &mdash; COVID-19 is primarily transmitted via prolonged airborne
+    contact. With that in mind, please maintain at least 6 feet of distance between
+    yourself and guests outside your household, even if you're wearing a mask. If
+    the weather allows we'll be holding our event outdoors as much as possible. Early-May
+    evenings can get chilly &mdash; with temperatures typically around 50&deg;F &mdash;
+    so please come prepared! That being said, our venue is well-ventilated and will
+    be able to accommodate our guests indoors if necessary.
+  </li>
+</ul>
+<h2>RSVP</h2>
 <Form
   id="rsvp"
   name="rsvp"
@@ -98,11 +137,6 @@
   :global(html) {
     --ssr-color: var(--c2);
     background-color: rgb(var(--ssr-color));
-  }
-
-  h1,
-  p {
-    text-align: center;
   }
 
   .is-attending {
