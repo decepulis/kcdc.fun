@@ -49,10 +49,11 @@
   the safety of you, our guests.
 </p>
 <p>
-  To that end, we would like to share the safeguards and guidelines we have
-  established for our event. Please take the time to carefully review them
-  before making an informed decision about your RSVP. We understand this is a
-  challenging time and are happy to answer any questions you might have.
+  To that end, we would like to share the safeguards we have established for our
+  event in accordance with guidelines from the CDC and the State of Illinois.
+  Please take the time to carefully review them before making an informed
+  decision about your RSVP. We understand this is a challenging time and are
+  happy to answer any questions you might have.
 </p>
 <ul>
   <li>
