@@ -18,24 +18,19 @@
     width: 100%;
     margin: 0 auto;
     margin-bottom: var(--gap);
-
-    display: grid;
-    grid-template-columns: 150px 1fr;
-
-    gap: var(--gap);
-
-    align-items: center;
-
     text-align: left;
   }
-  @media (max-width: 500px) {
-    form {
-      text-align: center;
-      grid-template-columns: 1fr;
-    }
+  :global(form > *) {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--gap);
+  }
+  :global(form > label) {
+    margin-bottom: var(--gap-05);
   }
 
   :global(form input),
+  :global(form textarea),
   :global(form label),
   :global(form select) {
     color: inherit;
@@ -43,6 +38,7 @@
     cursor: pointer;
   }
   :global(form [type="text"]),
+  :global(form textarea),
   :global(form select) {
     background: none;
     appearance: none;
@@ -50,6 +46,10 @@
     padding: var(--gap-05);
     border: var(--border) solid white;
     border-radius: 0;
+  }
+
+  :global(form textarea) {
+    max-width: 100%;
   }
 
   :global(form [type="radio"]) {
@@ -88,15 +88,6 @@
     background-repeat: no-repeat, repeat;
     background-position: right 0.7em top 50%, 0 0;
     background-size: 0.65em auto, 100%;
-  }
-
-  :global(form .span-2) {
-    grid-column: span 2;
-  }
-  @media (max-width: 500px) {
-    :global(form .span-2) {
-      grid-column: auto;
-    }
   }
 
   :global(form *) {

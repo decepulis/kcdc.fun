@@ -21,10 +21,54 @@
       guestCount = "1";
     }
   }
+  let podMembers = "";
 
-  $: isFormValid = isNotAttending || (isAttending && guestCount !== "");
+  let formState = {
+    showName: true,
+    isNameComplete: false,
+    showAttending: false,
+    isAttendingComplete: false,
+    showCount: false,
+    isCountComplete: false,
+    showPod: false,
+    isPodComplete: false,
+    showSubmit: false,
+  };
+  $: {
+    // The form is completed in the following sequence
+    // Fill out codebird
+    const showName = true;
+    const isNameComplete = typeof codeBirdEntry !== "undefined";
+    // Choose attending or not attending
+    const showAttending = isNameComplete;
+    const isAttendingComplete = typeof isAttendingGroup !== "undefined";
+    // Choose guest count
+    const showCount = isNameComplete && isAttending && maxGuestCount !== 1;
+    const isCountComplete = guestCount !== "";
+    // Chose pod members
+    const showPod = isNameComplete && isAttending && isCountComplete;
+    const isPodComplete = podMembers !== "";
+    // Submit button
+    const showSubmit =
+      isNameComplete &&
+      (isNotAttending ||
+        (isAttendingComplete && isCountComplete && isPodComplete));
+
+    formState = {
+      showName,
+      isNameComplete,
+      showAttending,
+      isAttendingComplete,
+      showCount,
+      isCountComplete,
+      showPod,
+      isPodComplete,
+      showSubmit,
+    };
+  }
+
   const handleOnSubmit = (e: Event) => {
-    if (!isFormValid) {
+    if (!formState.showSubmit) {
       e.preventDefault();
     }
   };
@@ -49,38 +93,34 @@
   the safety of you, our guests.
 </p>
 <p>
-  To that end, we would like to share the safeguards we have established for our
-  event in accordance with guidelines from the CDC and the State of Illinois.
-  Please take the time to carefully review them before making an informed
-  decision about your RSVP. We understand this is a challenging time and are
-  happy to answer any questions you might have.
+  To that end, please take the time to carefully review the following
+  information before making an informed decision about your RSVP. We understand
+  this is a challenging time and are happy to answer any questions you might
+  have.
 </p>
-<ul>
-  <li>
-    <i>Vaccinations</i> &mdash; We encourage everyone who has any COVID-19 vaccine
-    available to them to be vaccinated. Please remember that vaccines take about
-    two weeks to build full immunity.
-  </li>
-  <li>
-    <i>Testing</i> &mdash; We ask that all who don't yet have access to the vaccine
-    to take a COVID-19 test in the days leading up to the wedding, and to minimize
-    contact between the test and the event.
-  </li>
-  <li>
-    <i>Masks</i> &mdash; We request that you keep your mask on for the duration of
-    the event, unless eating or drinking. When not wearing your mask, please stay
-    with members of your own household.
-  </li>
-  <li>
-    <i>Ventilation</i> &mdash; COVID-19 is primarily transmitted via prolonged airborne
-    contact. With that in mind, please maintain at least 6 feet of distance between
-    yourself and guests outside your household, even if you're wearing a mask. If
-    the weather allows we'll be holding our event outdoors as much as possible. Early-May
-    evenings can get chilly &mdash; with temperatures typically around 50&deg;F &mdash;
-    so please come prepared! That being said, our venue is well-ventilated and will
-    be able to accommodate our guests indoors if necessary.
-  </li>
-</ul>
+<h3>Before the Event</h3>
+<p>
+  To those who have any COVID-19 vaccine available to them, we hope you will
+  consider being vaccinated. Please remember that vaccines take about two weeks
+  to build full immunity. Otherwise, we ask that you consider taking a COVID-19
+  test in the days leading up to the wedding and to minimize contact between the
+  test and the wedding.
+</p>
+<h3>At the Event</h3>
+<p>
+  COVID-19 is primarily transmitted via prolonged airborne contact. With that in
+  mind, we request that you keep your mask on for the duration of the event,
+  unless eating or drinking. When not wearing your mask, please stay with
+  members of your own household.
+</p>
+<p>
+  Finally, we will make an effort to hold as much of the event outdoors as
+  possible. That being said, it's early-May so it's hard to predict what we'll
+  get in terms of weather. (Past years have brought temperatures as low as
+  30&deg; and as high as 90&deg;!) Rest assured that the venue is
+  well-ventilated and will be able to accomodate you with ample room if
+  necessary.
+</p>
 <h2>RSVP</h2>
 <Form method="POST" netlify name="rsvp" onSubmit={handleOnSubmit}>
   <input type="hidden" name="form-name" value="rsvp" />
@@ -88,10 +128,7 @@
   <label for="rsvp-name">Your codebird</label>
   <input type="text" id="rsvp-name" name="name" bind:value={codeBird} />
 
-  <div
-    class="span-2 is-attending"
-    class:d-none={typeof codeBirdEntry === "undefined"}
-  >
+  <div class="span-2 is-attending" class:d-none={!formState.showAttending}>
     <div>
       <input
         type="radio"
@@ -114,17 +151,14 @@
     </div>
   </div>
 
-  <label
-    for="rsvp-guest-count"
-    class:d-none={!isAttending || maxGuestCount <= 1}
-  >
+  <label for="rsvp-guest-count" class:d-none={!formState.showCount}>
     How many guests are coming?
   </label>
   <select
     id="rsvp-guest-count"
     name="guest-count"
     bind:value={guestCount}
-    class:d-none={!isAttending || maxGuestCount <= 1}
+    class:d-none={!formState.showCount}
   >
     {#if maxGuestCount > 1}
       <option disabled selected value="">-</option>
@@ -136,7 +170,21 @@
     {/if}
   </select>
 
-  <Button type="submit" class={`span-2 ${!isFormValid ? "d-none" : ""}`}>
+  <label for="rsvp-pod" class="span-2" class:d-none={!formState.showPod}>
+    With whom would you be comfortable sitting for dinner?
+  </label>
+  <textarea
+    id="rsvp-pod"
+    name="pod"
+    class="span-2"
+    class:d-none={!formState.showPod}
+    bind:value={podMembers}
+  />
+
+  <Button
+    type="submit"
+    class={`span-2 ${!formState.showSubmit ? "d-none" : ""}`}
+  >
     RSVP
   </Button>
 </Form>
