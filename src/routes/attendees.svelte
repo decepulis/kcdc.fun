@@ -6,6 +6,29 @@
   <title>kcdc | Attendees</title>
 </svelte:head>
 
+<h2>Ceremony & Reception</h2>
+<p>
+  <img
+    src="img/figures/venue.png"
+    alt="A cute couple dances under the disco ball"
+    class="p-img p-img-200 float-right"
+  />
+  May 8, 2021 at 5pm
+  <br />
+  <br />
+  Bridge 410
+  <br />
+  410 N. Paulina St.
+  <br />
+  Chicago, IL 60622
+  <br />
+  <br />
+  Dinner &amp; Dancing to Follow
+  <br />
+  <br />
+  <Button href="https://goo.gl/maps/iv95UPVpV7X5wHDZA">Maps</Button>
+</p>
+
 <h2>Accommodations</h2>
 <p>
   <img
@@ -53,28 +76,6 @@
     </a>
   </li>
 </ul>
-<h2>Ceremony & Reception</h2>
-<p>
-  <img
-    src="img/figures/venue.png"
-    alt="A cute couple dances under the disco ball"
-    class="p-img p-img-200 float-right"
-  />
-  May 8, 2021 at 5pm
-  <br />
-  <br />
-  Bridge 410
-  <br />
-  410 N. Paulina St.
-  <br />
-  Chicago, IL 60622
-  <br />
-  <br />
-  Dinner &amp; Dancing to Follow
-  <br />
-  <br />
-  <Button href="https://goo.gl/maps/iv95UPVpV7X5wHDZA">Maps</Button>
-</p>
 
 <style>
   :global(html) {
