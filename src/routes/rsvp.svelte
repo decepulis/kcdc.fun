@@ -1,4 +1,6 @@
 <script lang="ts">
+  import confetti from "canvas-confetti";
+
   import Form from "../components/Form.svelte";
   import Button from "../components/Button.svelte";
 
@@ -7,12 +9,25 @@
   let codeBird = "";
   $: codeBirdEntry = rsvpList[codeBird.toLowerCase()];
   $: maxGuestCount = codeBirdEntry?.maxGuests;
+  $: categories = codeBirdEntry?.categories;
 
   let isAttendingGroup: string;
   let isAttendingTrue = "is-attending-true";
   let isAttendingFalse = "is-attending-false";
   $: isAttending = isAttendingGroup === isAttendingTrue;
   $: isNotAttending = isAttendingGroup === isAttendingFalse;
+
+  function onAttendingClick(event: MouseEvent) {
+    const { clientX, clientY } = event;
+    const { clientWidth, clientHeight } = document.documentElement;
+
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x: clientX / clientWidth, y: clientY / clientHeight },
+      disableForReducedMotion: true,
+    });
+  }
 
   let guestCount = "";
   $: {
@@ -28,6 +43,10 @@
     isNameComplete: false,
     showAttending: false,
     isAttendingComplete: false,
+    showHooray: false,
+    showFam: false,
+    showFren: false,
+    showAlso: false,
     showCount: false,
     isCountComplete: false,
     showPod: false,
@@ -42,11 +61,23 @@
     // Choose attending or not attending
     const showAttending = isNameComplete;
     const isAttendingComplete = typeof isAttendingGroup !== "undefined";
+    // Notify of additional events
+    const showHooray = isAttendingComplete && isAttending;
+    const showFam =
+      categories?.includes("fam") && isAttendingComplete && isAttending;
+    const showFren =
+      categories?.includes("fren") && isAttendingComplete && isAttending;
+    const showAlso = showFam && showFren;
     // Choose guest count
-    const showCount = isNameComplete && isAttending && maxGuestCount !== 1;
+    const showCount =
+      isNameComplete &&
+      isAttendingComplete &&
+      isAttending &&
+      maxGuestCount !== 1;
     const isCountComplete = guestCount !== "";
     // Chose pod members
-    const showPod = isNameComplete && isAttending && isCountComplete;
+    const showPod =
+      isNameComplete && isAttendingComplete && isAttending && isCountComplete;
     const isPodComplete = podMembers !== "";
     // Submit button
     const showSubmit =
@@ -59,6 +90,10 @@
       isNameComplete,
       showAttending,
       isAttendingComplete,
+      showHooray,
+      showFam,
+      showFren,
+      showAlso,
       showCount,
       isCountComplete,
       showPod,
@@ -136,8 +171,10 @@
         name="is-attending"
         value={isAttendingTrue}
         bind:group={isAttendingGroup}
+        on:click={onAttendingClick}
       />
-      <label for={isAttendingTrue}>Attending!</label>
+      <label for={isAttendingTrue} on:click={onAttendingClick}>Attending!</label
+      >
     </div>
     <div>
       <input
@@ -150,6 +187,18 @@
       <label for={isAttendingFalse}>Not Attending!</label>
     </div>
   </div>
+
+  <p class:d-none={!formState.showHooray}>Hooray!</p>
+
+  <p class:d-none={!formState.showFren}>
+    By the way, we are hoping to hold some sort of bachelor/ette party on Friday
+    night for us youths. Stay tuned for more info!
+  </p>
+  <p class:d-none={!formState.showAlso}>Also:</p>
+  <p class:d-none={!formState.showFam}>
+    We plan to hold a brunch for family on Sunday morning in lieu of a rehearsal
+    dinner. We'll have more to say about that soon.
+  </p>
 
   <label for="rsvp-guest-count" class:d-none={!formState.showCount}>
     How many guests are coming?
