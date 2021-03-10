@@ -62,11 +62,17 @@
     const showAttending = isNameComplete;
     const isAttendingComplete = typeof isAttendingGroup !== "undefined";
     // Notify of additional events
-    const showHooray = isAttendingComplete && isAttending;
+    const showHooray = isNameComplete && isAttendingComplete && isAttending;
     const showFam =
-      categories?.includes("fam") && isAttendingComplete && isAttending;
+      categories?.includes("fam") &&
+      isNameComplete &&
+      isAttendingComplete &&
+      isAttending;
     const showFren =
-      categories?.includes("fren") && isAttendingComplete && isAttending;
+      categories?.includes("fren") &&
+      isNameComplete &&
+      isAttendingComplete &&
+      isAttending;
     const showAlso = showFam && showFren;
     // Choose guest count
     const showCount =
