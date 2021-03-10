@@ -10,9 +10,14 @@
   let L4 = "img/layers/L4.svg";
   let BG = "img/layers/L5.jpg";
   const layers = [BG, L4, L3, L2, L1, L0];
-  const layerFactors = layers.map((__, index) =>
-    Math.pow(index / (layers.length - 1), 1.5)
-  );
+  const layerFactors = layers.map((__, index) => {
+    // layers are spaced according to this 1/5-root function
+    // with faraway layers closer together than nearby layers
+    const layerSpeed = Math.pow(index / (layers.length - 1), 1.5);
+    // Layer speeds are spaced between 0.2 and 1
+    const mappedlayerSpeed = 0.2 + layerSpeed * 0.8;
+    return mappedlayerSpeed;
+  });
 
   let scrollY: number;
   let coords = spring({ y: 0 }, { stiffness: 0.2, damping: 1 });
