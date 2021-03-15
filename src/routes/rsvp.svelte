@@ -226,7 +226,7 @@
   </select>
 
   <label for="rsvp-pod" class="span-2" class:d-none={!formState.showPod}>
-    With whom would you be comfortable sitting for dinner?
+    With whom would you be comfortable sitting for dinner, unmasked?
   </label>
   <textarea
     id="rsvp-pod"
