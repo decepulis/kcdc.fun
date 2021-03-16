@@ -195,19 +195,18 @@
   </div>
 
   <p class:d-none={!formState.showHooray}>Hooray!</p>
-
   <p class:d-none={!formState.showFren}>
     By the way, we are hoping to hold some sort of bachelor/ette party on Friday
     night for us youths. Stay tuned for more info!
   </p>
   <p class:d-none={!formState.showAlso}>Also:</p>
   <p class:d-none={!formState.showFam}>
-    We plan to hold a brunch for family on Sunday morning in lieu of a rehearsal
-    dinner. We'll have more to say about that soon.
+    By the way, we plan to hold a brunch for family on Sunday morning in lieu of
+    a rehearsal dinner. We'll have more to say about that soon.
   </p>
 
   <label for="rsvp-guest-count" class:d-none={!formState.showCount}>
-    How many guests are coming?
+    How many will be attending the wedding?
   </label>
   <select
     id="rsvp-guest-count"
