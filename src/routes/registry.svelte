@@ -102,6 +102,14 @@
     </RegistryListItemFooter>
   </RegistryListItem>
   <RegistryListItem>
+    <h3 class="h5">EarthHero</h3>
+    <RegistryListItemFooter>
+      <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
+        >View</Button
+      >
+    </RegistryListItemFooter>
+  </RegistryListItem>
+  <RegistryListItem>
     <h3 class="h5">Target</h3>
     <RegistryListItemFooter>
       <Button
@@ -115,14 +123,6 @@
     <RegistryListItemFooter>
       <Button
         href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
-        >View</Button
-      >
-    </RegistryListItemFooter>
-  </RegistryListItem>
-  <RegistryListItem>
-    <h3 class="h5">EarthHero</h3>
-    <RegistryListItemFooter>
-      <Button href="https://earthhero.com/registry/NDk0MDE6MjU4Mjc6NzI0N2Vi/"
         >View</Button
       >
     </RegistryListItemFooter>
