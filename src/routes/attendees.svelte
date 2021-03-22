@@ -36,7 +36,7 @@
     alt="A cute couple with their dog, packed up and ready for a night in a hotel"
     class="p-img p-img-150 float-right"
   />
-  We have secured a hotel block with Hotel Chicago West Loop, just 5 minutes away
+  We have secured* a hotel block with Hotel Chicago West Loop, just 5 minutes away
   from the venue. Hotel Chicago is offering us the following pricing as part of our
   hotel block:
 </p>
@@ -53,7 +53,13 @@
   <li>Pet Fee &mdash; $25/stay</li>
 </ul>
 <p>
-  <Button href="#" disabled>Link Coming Really Soon I Promise</Button>
+  * Actually the hotel hasn't been responding to our emails in the last few
+  weeks. Our next step is to face our millennial phone fears and... call them (
+  <i>gasp</i>
+  ).
+</p>
+<p>
+  <Button href="#" disabled>Link Coming Really Soon I Promise?</Button>
 </p>
 <p>
   If you'd like a bit more room to stretch your legs, the venue also recommends
