@@ -17,6 +17,7 @@
   }
   :global(a:hover) {
     text-decoration-style: wavy;
+    text-decoration-color: rgb(var(--cx));
   }
 
   :global(*) {
