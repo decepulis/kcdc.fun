@@ -88,8 +88,8 @@
     alt="A cute couple; one helps the other over the mountaintop"
     class="p-img p-img-150 float-left"
   />
-  Yes, we have a normal registry, too! Well, maybe a few. Narrowing down options
-  is hard, okay?? (Of course, we always love surprises, too.)
+  Yes, we have a normal registry, too! Well, maybe a few. (Of course, we always love
+  surprises, too.)
 </p>
 <RegistryList smol>
   <RegistryListItem>
@@ -114,15 +114,6 @@
     <RegistryListItemFooter>
       <Button
         href="https://www.target.com/gift-registry/giftgiver?registryId=6ef5f4634d554735885b4abe1dccf5d3"
-        >View</Button
-      >
-    </RegistryListItemFooter>
-  </RegistryListItem>
-  <RegistryListItem>
-    <h3 class="h5">Bed Bath<br />& Beyond</h3>
-    <RegistryListItemFooter>
-      <Button
-        href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/549901483"
         >View</Button
       >
     </RegistryListItemFooter>
