@@ -31,11 +31,19 @@
     margin-top: 0;
   }
 
-  :global(p, ul) {
+  :global(p, ul, blockquote) {
     margin-bottom: var(--gap);
   }
   :global(li) {
     margin-bottom: var(--gap-05);
+  }
+
+  :global(blockquote) {
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    padding: var(--gap);
+    border: var(--border) dotted white;
   }
 
   :global(h1),
@@ -56,11 +64,13 @@
   :global(h1),
   :global(.h1) {
     font-size: 2.488rem;
+    font-style: normal;
   }
 
   :global(h2),
   :global(.h2) {
     font-size: 2.441rem;
+    font-style: normal;
   }
 
   :global(h3),
@@ -72,11 +82,13 @@
   :global(h4),
   :global(.h4) {
     font-size: 1.563rem;
+    font-style: normal;
   }
 
   :global(h5),
   :global(.h5) {
     font-size: 1.25rem;
+    font-style: normal;
   }
 
   :global(small),

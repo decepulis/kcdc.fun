@@ -24,9 +24,18 @@
   <br />
   <br />
   Dinner &amp; Dancing to Follow
-  <br />
-  <br />
-  <Button href="https://goo.gl/maps/iv95UPVpV7X5wHDZA">Maps</Button>
+</p>
+<h3 class="h5">Maps:</h3>
+<p>
+  <span style="white-space:nowrap;">
+    <Button href="https://goo.gl/maps/iv95UPVpV7X5wHDZA">Google</Button>
+    <Button
+      href="https://maps.apple.com/?address=410%20N%20Paulina%20St,%20Chicago,%20IL%20%2060622,%20United%20States&auid=12558565121487026746&ll=41.889268,-87.669852&lsp=9902&q=Bridge%20410&_ext=ChoKBQgEEOIBCgQIBRADCgUIBhDfAQoECAoQABImKRa6EnJA8URAMZOK665C61XAOZSPOM5m8kRAQdtQDPp86lXAUAQ%3D"
+    >
+      Apple
+    </Button>
+    <Button href="https://waze.com/ul/hdp3wm18we">Waze</Button>
+  </span>
 </p>
 
 <h2>Accommodations</h2>
@@ -37,10 +46,16 @@
     alt="A cute couple with their dog, packed up and ready for a night in a hotel"
     class="p-img p-img-150 float-right"
   />
-  We have secured* a hotel block with Hotel Chicago West Loop, just 5 minutes away
-  from the venue. And of course, we'll provide a way to get from the hotel to the
-  venue and back, so you can have as much&hellip; cake&hellip; as you want.
+  We have secured<sup>*</sup> a hotel block with Hotel Chicago West Loop, just 5
+  minutes away from the venue. And of course, we'll provide a way to get from the
+  hotel to the venue and back, so you can have as much&hellip; cake&hellip; as you
+  want.
 </p>
+<blockquote>
+  <sup>*</sup>The hotel has confirmed our block, but has yet to provide us with
+  a link. If you would like to book immediately, please contact us and we will
+  put you in touch with our point of contact directly.
+</blockquote>
 <p>
   Hotel Chicago is offering us the following pricing as part of our hotel block:
 </p>
@@ -54,15 +69,19 @@
   <li>Nearby Parking Garage &mdash; $16/night</li>
 </ul>
 <ul>
-  <li>Pet Fee &mdash; $25/stay</li>
+  <li>Pet Fee &mdash; $50/stay</li>
 </ul>
+<h3 class="h5">Maps:</h3>
 <p>
-  <Button href="#" disabled>Link Coming Really Soon I Promise?</Button>
-</p>
-<p>
-  * The hotel has confirmed our block, but has yet to provide us with a link. If
-  you would like to book immediately, please contact us and we will put you in
-  touch with our point of contact directly.
+  <span style="white-space:nowrap;">
+    <Button href="https://goo.gl/maps/Wep9gYzSnyYYCgCC7">Google</Button>
+    <Button
+      href="https://maps.apple.com/?address=1622%20W%20Jackson%20Blvd,%20Chicago,%20IL%20%2060612,%20United%20States&auid=1709128223409587896&ll=41.877865,-87.667782&lsp=9902&q=Hotel%20Chicago%20West%20Loop%20/%20Illinois%20Medical%20District&_ext=ChkKBQgEEOIBCgQIBRADCgQIBhALCgQIChAAEiYph9G9ic3vREAxzVafzx7rVcA5Bafj5fPwREBBhU23I1nqVcBQAw%3D%3D"
+    >
+      Apple
+    </Button>
+    <Button href="https://waze.com/ul/hdp3wjpd71">Waze</Button>
+  </span>
 </p>
 <h3>Alternatives</h3>
 <p>
