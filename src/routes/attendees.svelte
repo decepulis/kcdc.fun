@@ -30,6 +30,7 @@
 </p>
 
 <h2>Accommodations</h2>
+<h3>Wedding Hotel</h3>
 <p>
   <img
     src="img/figures/hotel.png"
@@ -37,8 +38,11 @@
     class="p-img p-img-150 float-right"
   />
   We have secured* a hotel block with Hotel Chicago West Loop, just 5 minutes away
-  from the venue. Hotel Chicago is offering us the following pricing as part of our
-  hotel block:
+  from the venue. And of course, we'll provide a way to get from the hotel to the
+  venue and back, so you can have as much&hellip; cake&hellip; as you want.
+</p>
+<p>
+  Hotel Chicago is offering us the following pricing as part of our hotel block:
 </p>
 <ul>
   <li>Single Full &mdash; $109</li>
@@ -53,14 +57,14 @@
   <li>Pet Fee &mdash; $25/stay</li>
 </ul>
 <p>
-  * Actually the hotel hasn't been responding to our emails in the last few
-  weeks. Our next step is to face our millennial phone fears and... call them (
-  <i>gasp</i>
-  ).
-</p>
-<p>
   <Button href="#" disabled>Link Coming Really Soon I Promise?</Button>
 </p>
+<p>
+  * The hotel has confirmed our block, but has yet to provide us with a link. If
+  you would like to book immediately, please contact us and we will put you in
+  touch with our point of contact directly.
+</p>
+<h3>Alternatives</h3>
 <p>
   If you'd like a bit more room to stretch your legs, the venue also recommends
   the following nearby hotels:
