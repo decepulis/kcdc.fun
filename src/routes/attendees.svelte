@@ -46,30 +46,22 @@
     alt="A cute couple with their dog, packed up and ready for a night in a hotel"
     class="p-img p-img-150 float-right"
   />
-  We have secured<sup>*</sup> a hotel block with Hotel Chicago West Loop, just 5
-  minutes away from the venue. And of course, we'll provide a way to get from the
-  hotel to the venue and back, so you can have as much&hellip; cake&hellip; as you
-  want.
+  We have secured hotel block with Hotel Chicago West Loop, just 5 minutes away from
+  the venue. And of course, we'll provide a way to get from the hotel to the venue
+  and back, so you can have as much&hellip; cake&hellip; as you want.
 </p>
-<blockquote>
-  <sup>*</sup>The hotel has confirmed our block, but has yet to provide us with
-  a link. If you would like to book immediately, please contact us and we will
-  put you in touch with our point of contact directly.
-</blockquote>
 <p>
-  Hotel Chicago is offering us the following pricing as part of our hotel block:
+  <Button
+    href="http://be.synxis.com/?Hotel=9630&Chain=6017&Arrive=2021-05-07&Depart=2021-05-09&Group=CEPUL210507-184158"
+  >
+    Book Rooms
+  </Button>
 </p>
+<p>The following options are also available upon arrival:</p>
 <ul>
-  <li>Single Full &mdash; $109</li>
-  <li>Queen &mdash; $117</li>
-  <li>King &mdash; $126</li>
-</ul>
-<ul>
-  <li>On-Site Parking &mdash; $25/night</li>
-  <li>Nearby Parking Garage &mdash; $16/night</li>
-</ul>
-<ul>
-  <li>Pet Fee &mdash; $50/stay</li>
+  <li>$25/night &mdash; On-site parking</li>
+  <li>$16/night &mdash; Nearby parking</li>
+  <li>$50/stay &mdash; Pet Fee</li>
 </ul>
 <h3 class="h5">Maps:</h3>
 <p>
