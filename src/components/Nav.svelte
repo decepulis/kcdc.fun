@@ -87,7 +87,9 @@
     /* background color stops just under text */
     background-color: rgb(var(--background-color, var(--ssr-color)));
     /* gradient under text handled by shadow */
-    box-shadow: 0 0 var(--gap) var(--gap)
+    --shadow-offset: 3px;
+    --shadow-height: calc(var(--gap) - var(--shadow-offset));
+    box-shadow: 0 var(--shadow-offset) var(--shadow-height) var(--shadow-height)
       rgb(var(--background-color, var(--ssr-color)));
     transition: background-color var(--page-transition-duration) ease-in-out,
       box-shadow var(--page-transition-duration) ease-in-out;
