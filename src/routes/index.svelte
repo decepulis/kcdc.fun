@@ -52,29 +52,22 @@
 
 <section class="content">
   <h1>Kristin and Darius are getting married!</h1>
+  <p class="embed-container">
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube-nocookie.com/embed/IuhG5XDUMeQ?controls=0"
+      title="The Wedding of Kristin Bradford and Darius Cepulis"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    />
+  </p>
   <p>
     <i>May 8, 2021</i>
     <br />
     <CountdownTimer utcHours={22} utcDate={8} utcMonth={5} utcYear={2021} />
   </p>
-  <h2>An Update</h2>
-  <p>
-    Sadly, due to COVID-19, we have to move forward with our wedding at a
-    reduced capacity. We expect the current Illinois restrictions to still be in
-    effect by May 8th, so we are limiting our guest list to a small number.
-  </p>
-  <p>
-    We hope that you’ll still be able to join us via our online ceremony. More
-    information will be available here on the day of the wedding.
-  </p>
-  <p>
-    We desperately wish we could invite everyone, and are so terribly sorry it
-    hasn’t worked out that way. We do, however, still look forward to
-    celebrating with you when conditions improve. Until then, we hope you stay
-    safe and well, and know that our thoughts and hearts are with you.
-  </p>
-  <p>With love,</p>
-  <p><i>&ndash;&nbsp;kcdc</i></p>
 </section>
 
 <style>
@@ -125,6 +118,7 @@
     min-height: calc(100vh - var(--gap-2) - var(--nav-height));
 
     padding-top: var(--gap);
+    text-align: center;
 
     /*
     We use negative margins to show
@@ -145,5 +139,18 @@
 
   .content h1 {
     margin-top: 0;
+  }
+
+  .embed-container {
+    width: 100%;
+    padding-bottom: calc(100% * 0.5625);
+    position: relative;
+  }
+  .embed-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
   }
 </style>
