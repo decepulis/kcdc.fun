@@ -36,7 +36,7 @@ export const rsvpList: RsvpList = {
   hawk: { maxGuests: 1, categories: ["fren"] },
   //
   stork: { maxGuests: 2, categories: ["fam"] },
-  grackle: { maxGuests: 1, categories: ["fren"] },
+  grackle: { maxGuests: 2, categories: ["fren"] },
   emu: { maxGuests: 1, categories: ["fren"] },
   goldfinch: { maxGuests: 1, categories: ["fren"] },
   mockingbird: { maxGuests: 1, categories: ["fren"] },
