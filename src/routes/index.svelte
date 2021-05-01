@@ -70,6 +70,8 @@
   </p>
 </section>
 
+<a class="hidden" aria-hidden href="test" tabindex="-1">Secret Test Page</a>
+
 <style>
   :global(html) {
     --ssr-color: var(--c1);
@@ -152,5 +154,9 @@
     height: 100%;
     left: 0;
     top: 0;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>
