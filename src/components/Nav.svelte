@@ -37,14 +37,6 @@
         href="registry">registry</a
       >
     </li>
-    <li>
-      <a
-        aria-current={segment === "test" ? "page" : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="test">test</a
-      >
-    </li>
   </ul>
 </nav>
 
