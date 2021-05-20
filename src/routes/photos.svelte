@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Gallery from '../components/CloudinaryTagGallery.svelte'
+	import Gallery from '../components/CloudinaryTagGallery.svelte';
 </script>
 
 <svelte:head>
-  <title>kcdc | Video & Photos</title>
+	<title>kcdc | Video & Photos</title>
 </svelte:head>
 
 <h2>Video</h2>
-<p class="embed-container">
+<!-- <p class="embed-container">
   <iframe
     width="560"
     height="315"
@@ -17,22 +17,22 @@
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
   />
-</p>
+</p> -->
 
 <h2>Photos</h2>
-<Gallery cloudName="decepulis" tag="kcdc"/>
+<Gallery cloudName="decepulis" tag="kcdc" />
 
 <style>
-  .embed-container {
-    width: 100%;
-    padding-bottom: calc(100% * 0.5625);
-    position: relative;
-  }
-  .embed-container iframe {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-  }
+	.embed-container {
+		width: 100%;
+		padding-bottom: calc(100% * 0.5625);
+		position: relative;
+	}
+	.embed-container iframe {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
 </style>
