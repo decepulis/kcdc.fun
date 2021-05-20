@@ -24,7 +24,7 @@
   );
 
   function formatDateInterval(date1: Date, date2: Date) {
-    const intervalMilliseconds = date2.getTime() - date1.getTime();
+    const intervalMilliseconds = Math.abs(date2.getTime() - date1.getTime());
     const displayDays = Math.abs(
       Math.floor(intervalMilliseconds / 1000 / 24 / 60 / 60)
     );
@@ -44,7 +44,7 @@
   $: displayString = formatDateInterval(currentDate, countdownDate);
 
   const period = 500;
-  let interval: number;
+  let interval: ReturnType<typeof setInterval>;
 
   onMount(() => {
     interval = setInterval(() => {
