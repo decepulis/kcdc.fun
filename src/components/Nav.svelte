@@ -15,22 +15,15 @@
     </li>
     <li>
       <a
-        aria-current={segment === "rsvp" ? "page" : undefined}
+        aria-current={segment === "photos" ? "page" : undefined}
         sapper:noscroll
         rel="prefetch"
-        href="rsvp">rsvp</a
+        href="photos">photos</a
       >
     </li>
-    <li>
+    <li class="hidden" tabindex="-1">
       <a
-        aria-current={segment === "attendees" ? "page" : undefined}
-        sapper:noscroll
-        rel="prefetch"
-        href="attendees">attendees</a
-      >
-    </li>
-    <li>
-      <a
+        tabindex="-1"
         aria-current={segment === "registry" ? "page" : undefined}
         sapper:noscroll
         rel="prefetch"
@@ -176,5 +169,8 @@
   a[aria-current]::after {
     opacity: 1;
     transform: scaleX(1);
+  }
+  .hidden {
+    display: none;
   }
 </style>

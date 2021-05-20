@@ -51,26 +51,13 @@
 </div>
 
 <section class="content">
-  <h1>Kristin and Darius are getting married!</h1>
-  <p class="embed-container">
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube-nocookie.com/embed/IuhG5XDUMeQ?controls=0"
-      title="The Wedding of Kristin Bradford and Darius Cepulis"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    />
-  </p>
+  <h1>Kristin and Darius got married!</h1>
   <p>
     <i>May 8, 2021</i>
     <br />
     <CountdownTimer utcHours={22} utcDate={8} utcMonth={5} utcYear={2021} />
   </p>
 </section>
-
-<a class="hidden" aria-hidden href="test" tabindex="-1">Secret Test Page</a>
 
 <style>
   :global(html) {
@@ -143,20 +130,5 @@
     margin-top: 0;
   }
 
-  .embed-container {
-    width: 100%;
-    padding-bottom: calc(100% * 0.5625);
-    position: relative;
-  }
-  .embed-container iframe {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-  }
 
-  .hidden {
-    display: none;
-  }
 </style>
