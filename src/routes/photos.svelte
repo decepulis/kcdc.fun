@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Gallery from '../components/CloudinaryTagGallery.svelte';
+	import Gallery from '../components/Cloudinary/TagGallery.svelte';
 </script>
 
 <svelte:head>

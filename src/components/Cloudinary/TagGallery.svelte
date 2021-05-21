@@ -1,24 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { hash } from '../../stores/hash';
+
+	import CloudinaryViewer from './Viewer.svelte';
+
+	import { galleryFeatureUrl, galleryStandardUrl, placeholderUrl } from './utils';
+	import type { Photos } from './types';
 
 	export let cloudName: string;
 	export let tag: string;
 
 	// Fetch list of photos
-	interface Resource {
-		public_id: string;
-		version: number;
-		format: string;
-		width: number;
-		height: number;
-		created_at: string;
-		type: string;
-	}
-	interface Photos {
-		resources: Array<Resource>;
-		updated_at: string;
-	}
-
 	let photos: Photos;
 	let publicIds: string[];
 	let featured: Photos;
@@ -28,7 +20,7 @@
 
 	$: {
 		if (typeof photos === 'undefined') break $;
-		publicIds = photos.resources.map((resource) => resource.public_id);
+		publicIds = photos.resources.map((resource) => resource.public_id).sort();
 	}
 	$: {
 		if (typeof featured === 'undefined') break $;
@@ -69,15 +61,7 @@
 	$: gridWidth = gridOffsetWidth / targetGridItemCount - totalRowGapWidth / targetGridItemCount;
 	$: gridHeight = gridWidth * heightRatio;
 
-	// Some URL generators for that grid
-	const featureUrl = (publicId: string) =>
-		`https://res.cloudinary.com/decepulis/image/upload/w_${featureWidth},h_${featureHeight},c_fill/q_auto/f_auto/${publicId}`;
-	const standardUrl = (publicId: string) =>
-		`https://res.cloudinary.com/decepulis/image/upload/w_${baseWidth},h_${baseHeight},c_fill/q_auto/f_auto/${publicId}`;
-	const placeholderUrl = (publicId: string) =>
-		`https://res.cloudinary.com/decepulis/image/upload/b_auto:predominant,c_pad,w_iw_div_2,ar_1/c_fill,g_south_east,w_1,h_1/q_auto/f_auto/${publicId}`;
-
-	// Finally, lazy load photos as they appear
+	// Lazy load photos as they appear
 	let observer: IntersectionObserver | undefined = undefined;
 	let observed = new Set<string>();
 	onMount(() => {
@@ -138,29 +122,44 @@
 	};
 </script>
 
+{#if typeof photos !== 'undefined'}
+	<CloudinaryViewer {photos} {cloudName} />
+{/if}
 <div class="photo-container">
 	{#if ready}
 		<ul
 			bind:offsetWidth={gridOffsetWidth}
 			style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;"
 		>
-			{#each publicIds.sort() as publicId}
+			{#each publicIds as publicId}
 				<li
 					class:featured={featuredIds.has(publicId)}
-					style="background-image:url({placeholderUrl(publicId)});"
+					style="background-image:url({placeholderUrl({ cloudName, publicId })});"
 				>
-					<img
-						data-publicid={publicId}
-						src={observed.has(publicId)
-							? featuredIds.has(publicId)
-								? featureUrl(publicId)
-								: standardUrl(publicId)
-							: ''}
-						class:loaded={loaded.has(publicId)}
-						on:load={onImageLoad}
-						bind:this={imageRefsByPublicId[publicId]}
-						alt=""
-					/>
+					<button aria-label="Open modal with {publicId}" on:click={() => hash.set(publicId)}>
+						<img
+							data-publicid={publicId}
+							class:loaded={loaded.has(publicId)}
+							on:load={onImageLoad}
+							bind:this={imageRefsByPublicId[publicId]}
+							src={observed.has(publicId)
+								? featuredIds.has(publicId)
+									? galleryFeatureUrl({
+											cloudName,
+											publicId,
+											width: featureWidth,
+											height: featureHeight
+									  })
+									: galleryStandardUrl({
+											cloudName,
+											publicId,
+											width: baseWidth,
+											height: baseHeight
+									  })
+								: ''}
+							alt=""
+						/>
+					</button>
 				</li>
 			{/each}
 		</ul>
@@ -193,36 +192,47 @@
 	}
 	li {
 		margin: 0;
-		overflow: hidden;
-		transition: box-shadow var(--transition-duration);
-		box-shadow: 0 0 0 0 rgb(var(--cx));
+		display: relative;
 	}
-	li:hover {
-		box-shadow: 0 0 0 calc(var(--gridGap) * 0.75) rgb(var(--cx));
-	}
-
 	.featured {
 		grid-column: span 2;
 		grid-row: span 2;
 	}
+
+	button {
+		width: 100%;
+		height: 100%;
+
+		background: none;
+		border: 0;
+		padding: 0;
+		margin: 0;
+		font-family: inherit;
+		font-size: inherit;
+		font-style: inherit;
+		color: inherit;
+
+		cursor: pointer;
+
+		overflow: hidden;
+		transition: box-shadow var(--transition-duration);
+		box-shadow: 0 0 0 0 rgb(var(--cx));
+	}
+	button:hover {
+		box-shadow: 0 0 0 calc(var(--gridGap) * 0.75) rgb(var(--cx));
+	}
+	button:active {
+		box-shadow: 0 0 0 calc(var(--gridGap) * 0.25) rgb(var(--cx));
+	}
+
 	img {
 		width: 100%;
 		height: 100%;
-		cursor: pointer;
 
 		opacity: 0;
-		transform: scale(1);
-		will-change: transform;
-
-		transition: opacity var(--transition-duration-long), transform var(--transition-duration);
+		transition: opacity var(--transition-duration-long);
 	}
 	img.loaded {
 		opacity: 1;
-	}
-	img:hover {
-		transform: scale(1.03);
-	}
-	img:active {
-		transform: scale(1);
 	}
 </style>
