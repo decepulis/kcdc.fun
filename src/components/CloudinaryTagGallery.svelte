@@ -18,30 +18,21 @@
 		resources: Array<Resource>;
 		updated_at: string;
 	}
-	type PublicIdManager = {
-		[publicId: string]: {
-			observed: boolean;
-			reference: HTMLImageElement | undefined;
-		};
-	};
 
-	let photos: Photos | undefined = undefined;
-	let publicIdManagers: PublicIdManager = {};
-	let featured: Photos | undefined = undefined;
-	let featuredIds: string[] | undefined = undefined;
+	let photos: Photos;
+	let publicIds: string[];
+	let featured: Photos;
+	let featuredIds: Set<string>;
+
+	let imageRefsByPublicId: { [publicId: string]: HTMLImageElement } = {};
 
 	$: {
 		if (typeof photos === 'undefined') break $;
-		photos.resources.forEach((resource) => {
-			publicIdManagers[resource.public_id] = {
-				observed: false,
-				reference: undefined
-			};
-		});
+		publicIds = photos.resources.map((resource) => resource.public_id);
 	}
 	$: {
 		if (typeof featured === 'undefined') break $;
-		featuredIds = featured.resources.map((resource) => resource.public_id);
+		featuredIds = new Set(featured.resources.map((resource) => resource.public_id));
 	}
 
 	onMount(async () => {
@@ -55,7 +46,7 @@
 		featured = await res.json();
 	});
 
-	$: loaded = Object.keys(publicIdManagers).length !== 0 && typeof featuredIds !== 'undefined';
+	$: ready = typeof publicIds !== 'undefined' && typeof featuredIds !== 'undefined';
 
 	// Set up grid
 	// TODO: resize grid items to fill empty space on right
@@ -80,17 +71,36 @@
 
 	// Finally, lazy load photos as they appear
 	let observer: IntersectionObserver | undefined = undefined;
+	let observed = new Set<string>();
 	onMount(() => {
 		if (typeof IntersectionObserver === 'undefined') return;
 		const observerConfig: IntersectionObserverInit = {
 			root: null,
-			threshold: 0.5
+			threshold: [0.25, 0.5]
 		};
-		observer = new IntersectionObserver((entries) => {
-			const intersecting = entries?.[0]?.isIntersecting;
-			if (intersecting) {
-				// TODO: move data into image
-			}
+		observer = new IntersectionObserver((entries, self) => {
+			entries.forEach((entry) => {
+				const intersectionRatio = entry.intersectionRatio;
+
+				const target = entry.target as HTMLImageElement;
+				const { publicid: publicId } = target.dataset;
+
+				// We observed featured images (double-height) at 25%
+				// and standard images at 50%.
+				// This way, a whole row --
+				// i.e., the top half of a featured image and a whole standard image --
+				// loads at once
+				const shouldObserve = featuredIds.has(publicId)
+					? intersectionRatio >= 0.25
+					: intersectionRatio >= 0.5;
+				if (shouldObserve) {
+					// place placeholder in background
+					// and image in source
+					observed = new Set([...observed, publicId]);
+					// Remove observer
+					self.unobserve(target);
+				}
+			});
 		}, observerConfig);
 
 		return () => observer.disconnect();
@@ -100,43 +110,65 @@
 		if (typeof IntersectionObserver === 'undefined') break $;
 
 		// attach observers to images as they come in
-		if (Object.keys(publicIdManagers).length === 0) break $;
+		// once the observer and image refs are ready
+		if (typeof observer === 'undefined') break $;
+		if (Object.keys(imageRefsByPublicId).length === 0) break $;
 
-		console.log('run');
-
-		Object.entries(publicIdManagers).forEach(([publicId, entry]) => {
-			console.log(publicId, entry);
+		Object.entries(imageRefsByPublicId).forEach(([publicId, imageRef]) => {
+			observer.observe(imageRef);
 		});
 	}
+	let loaded = new Set<string>();
+	const onImageLoad = (e: Event) => {
+		const target = e.target as HTMLImageElement;
+		const { publicid: publicId } = target.dataset;
+		loaded = new Set([...loaded, publicId]);
+	};
 </script>
 
-{#if loaded}
-	<ul style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;">
-		{#each Object.keys(publicIdManagers).sort().slice(0, 50) as publicId}
-			<li class:featured={featuredIds.includes(publicId)}>
-				<img
-					src={publicIdManagers[publicId].observed
-						? featuredIds.includes(publicId)
-							? featureUrl(publicId)
-							: standardUrl(publicId)
-						: placeholderUrl(publicId)}
-					alt=""
-					bind:this={publicIdManagers[publicId].reference}
-				/>
-			</li>
-		{/each}
-	</ul>
-{:else}
-	<p>...loading</p>
-{/if}
+<div class="photo-container">
+	{#if ready}
+		<ul style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;">
+			{#each publicIds.sort() as publicId}
+				<li
+					class:featured={featuredIds.has(publicId)}
+					style="background-image:url({placeholderUrl(publicId)});"
+				>
+					<img
+						data-publicid={publicId}
+						src={observed.has(publicId)
+							? featuredIds.has(publicId)
+								? featureUrl(publicId)
+								: standardUrl(publicId)
+							: ''}
+						class:loaded={loaded.has(publicId)}
+						on:load={onImageLoad}
+						bind:this={imageRefsByPublicId[publicId]}
+						alt=""
+					/>
+				</li>
+			{/each}
+		</ul>
+	{:else}
+		<p>...loading</p>
+	{/if}
+</div>
 
 <style>
+	.photo-container {
+		grid-column: fullpage-start / fullpage-end !important;
+
+		padding-left: var(--gap);
+		padding-right: var(--gap);
+		padding-left: max(env(safe-area-inset-left), var(--gap));
+		padding-right: max(env(safe-area-inset-right), var(--gap));
+	}
 	ul {
 		list-style-type: none;
 
-		grid-column: fullpage-start / fullpage-end !important;
-
-		padding: 0 var(--gap);
+		max-width: calc(var(--content-width) * 2);
+		margin: 0 auto;
+		padding: 0;
 
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(var(--gridWidth), var(--gridWidth)));
@@ -152,7 +184,7 @@
 	}
 	li:hover {
 		transform: scale(1.03);
-		box-shadow: 0 0 0 var(--border) rgb(var(--cx));
+		box-shadow: 0 0 0 calc(var(--gridGap) / 2) rgb(var(--cx));
 	}
 	li:active {
 		transform: scale(1);
@@ -165,5 +197,10 @@
 	img {
 		width: 100%;
 		height: 100%;
+		opacity: 0;
+		transition: opacity var(--transition-duration);
+	}
+	img.loaded {
+		opacity: 1;
 	}
 </style>

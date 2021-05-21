@@ -7,17 +7,17 @@
 </svelte:head>
 
 <h2>Video</h2>
-<!-- <p class="embed-container">
-  <iframe
-    width="560"
-    height="315"
-    src="https://www.youtube-nocookie.com/embed/IuhG5XDUMeQ?controls=0"
-    title="The Wedding of Kristin Bradford and Darius Cepulis"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  />
-</p> -->
+<p class="embed-container">
+	<iframe
+		width="560"
+		height="315"
+		src="https://www.youtube-nocookie.com/embed/IuhG5XDUMeQ?controls=0"
+		title="The Wedding of Kristin Bradford and Darius Cepulis"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+	/>
+</p>
 
 <h2>Photos</h2>
 <Gallery cloudName="decepulis" tag="kcdc" />
