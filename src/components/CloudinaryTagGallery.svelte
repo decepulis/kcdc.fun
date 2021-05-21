@@ -114,8 +114,12 @@
 		return () => observer.disconnect();
 	});
 	$: {
-		// fallback behavior for IE
-		if (typeof IntersectionObserver === 'undefined') break $;
+		if (typeof publicIds === 'undefined') break $;
+		// fallback behavior for those poor IE users
+		if (typeof IntersectionObserver === 'undefined') {
+			observed = new Set(publicIds);
+			break $;
+		}
 
 		// attach observers to images as they come in
 		// once the observer and image refs are ready
@@ -161,7 +165,7 @@
 			{/each}
 		</ul>
 	{:else}
-		<p>...loading</p>
+		<p style="text-align:center;">...loading</p>
 	{/if}
 </div>
 
@@ -190,15 +194,11 @@
 	li {
 		margin: 0;
 		overflow: hidden;
-		transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-		cursor: pointer;
+		transition: box-shadow var(--transition-duration);
+		box-shadow: 0 0 0 0 rgb(var(--cx));
 	}
 	li:hover {
-		transform: scale(1.03);
-		box-shadow: 0 0 0 calc(var(--gridGap) / 2) rgb(var(--cx));
-	}
-	li:active {
-		transform: scale(1);
+		box-shadow: 0 0 0 calc(var(--gridGap) * 0.75) rgb(var(--cx));
 	}
 
 	.featured {
@@ -208,10 +208,21 @@
 	img {
 		width: 100%;
 		height: 100%;
+		cursor: pointer;
+
 		opacity: 0;
-		transition: opacity var(--transition-duration);
+		transform: scale(1);
+		will-change: transform;
+
+		transition: opacity var(--transition-duration-long), transform var(--transition-duration);
 	}
 	img.loaded {
 		opacity: 1;
+	}
+	img:hover {
+		transform: scale(1.03);
+	}
+	img:active {
+		transform: scale(1);
 	}
 </style>
