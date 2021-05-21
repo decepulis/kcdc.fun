@@ -244,9 +244,10 @@
 		top: 0;
 
 		opacity: 0;
-		transition: opacity var(--transition-duration-long);
+		transition: opacity 0s;
 	}
 	img.loaded {
 		opacity: 1;
+		transition: opacity var(--transition-duration-long);
 	}
 </style>
