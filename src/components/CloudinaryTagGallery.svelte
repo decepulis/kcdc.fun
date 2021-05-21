@@ -49,23 +49,31 @@
 	$: ready = typeof publicIds !== 'undefined' && typeof featuredIds !== 'undefined';
 
 	// Set up grid
-	// TODO: resize grid items to fill empty space on right
-	// e.g., allow grid items to be 75px to 125px
-	//       but don't use these variables;
-	//       we want cloudinary to stick with 100 and 200
-	const gridWidth = 100;
-	const gridHeight = 100;
-	const gridGap = 4;
+	// the base width and height as well as the feature width and height
+	// are the dimensions sent to cloudinary.
+	// they're the approximate size of the grid elements
+	const baseWidth = 100;
+	const heightRatio = 1;
+	const baseHeight = baseWidth * heightRatio;
 
-	const featureFactor = 2;
-	const featureWidth = gridWidth * featureFactor + gridGap;
-	const featureHeight = gridHeight * featureFactor + gridGap;
+	const gridGap = 4;
+	const featureRatio = 2;
+	const featureWidth = baseWidth * featureRatio + gridGap;
+	const featureHeight = baseHeight * featureRatio + gridGap;
+
+	// Here, we calculate a width for grid items in order to fit
+	// as many whole number grid items into the available width as possible.
+	let gridOffsetWidth: number;
+	$: targetGridItemCount = Math.floor(gridOffsetWidth / baseWidth);
+	$: totalRowGapWidth = (targetGridItemCount - 1) * gridGap;
+	$: gridWidth = gridOffsetWidth / targetGridItemCount - totalRowGapWidth / targetGridItemCount;
+	$: gridHeight = gridWidth * heightRatio;
 
 	// Some URL generators for that grid
 	const featureUrl = (publicId: string) =>
 		`https://res.cloudinary.com/decepulis/image/upload/w_${featureWidth},h_${featureHeight},c_fill/q_auto/f_auto/${publicId}`;
 	const standardUrl = (publicId: string) =>
-		`https://res.cloudinary.com/decepulis/image/upload/w_${gridWidth},h_${gridHeight},c_fill/q_auto/f_auto/${publicId}`;
+		`https://res.cloudinary.com/decepulis/image/upload/w_${baseWidth},h_${baseHeight},c_fill/q_auto/f_auto/${publicId}`;
 	const placeholderUrl = (publicId: string) =>
 		`https://res.cloudinary.com/decepulis/image/upload/b_auto:predominant,c_pad,w_iw_div_2,ar_1/c_fill,g_south_east,w_1,h_1/q_auto/f_auto/${publicId}`;
 
@@ -128,7 +136,10 @@
 
 <div class="photo-container">
 	{#if ready}
-		<ul style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;">
+		<ul
+			bind:offsetWidth={gridOffsetWidth}
+			style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;"
+		>
 			{#each publicIds.sort() as publicId}
 				<li
 					class:featured={featuredIds.has(publicId)}
