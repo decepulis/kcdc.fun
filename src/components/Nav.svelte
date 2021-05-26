@@ -10,7 +10,7 @@
 				sveltekit:noscroll
 				sveltekit:prefetch
 				style="font-style:italic;"
-				href=".">kcdc</a
+				href="/">kcdc</a
 			>
 		</li>
 		<li>
@@ -18,7 +18,7 @@
 				aria-current={path === '/photos' ? 'page' : undefined}
 				sveltekit:noscroll
 				sveltekit:prefetch
-				href="photos">photos</a
+				href="/photos">photos</a
 			>
 		</li>
 		<li class="hidden" tabindex="-1">
@@ -27,7 +27,7 @@
 				aria-current={path === '/registry' ? 'page' : undefined}
 				sveltekit:noscroll
 				sveltekit:prefetch
-				href="registry">registry</a
+				href="/registry">registry</a
 			>
 		</li>
 	</ul>
