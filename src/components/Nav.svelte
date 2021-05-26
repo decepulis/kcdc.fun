@@ -21,15 +21,6 @@
 				href="/photos">photos</a
 			>
 		</li>
-		<li class="hidden" tabindex="-1">
-			<a
-				tabindex="-1"
-				aria-current={path === '/registry' ? 'page' : undefined}
-				sveltekit:noscroll
-				sveltekit:prefetch
-				href="/registry">registry</a
-			>
-		</li>
 	</ul>
 </nav>
 
@@ -167,8 +158,5 @@
 	a[aria-current]::after {
 		opacity: 1;
 		transform: scaleX(1);
-	}
-	.hidden {
-		display: none;
 	}
 </style>
