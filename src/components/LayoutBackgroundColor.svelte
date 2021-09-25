@@ -1,4 +1,6 @@
 <script lang="ts">
+	import './LayoutBackgroundColor.css';
+
 	export let path: string;
 	export let pageTransitionDuration: number;
 
@@ -22,16 +24,3 @@
 		);
 	}
 </script>
-
-<style>
-	:global(html) {
-		/* Before any JS runs, by default, the background will be c1 */
-		--ssr-color: var(--c1);
-		background-color: rgb(var(--ssr-color));
-	}
-	:global(body) {
-		/* Once JS runs, the body background color takes over */
-		background-color: rgb(var(--background-color));
-		transition: background-color var(--page-transition-duration) ease-in-out;
-	}
-</style>

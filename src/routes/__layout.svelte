@@ -10,18 +10,16 @@
 <script lang="ts">
 	import Nav from '../components/Nav.svelte';
 	import LayoutBackgroundColor from '../components/LayoutBackgroundColor.svelte';
-	import LayoutTypeSystem from '../components/LayoutTypeSystem.svelte';
 	import LayoutTransitionContainer from '../components/LayoutTransitionContainer.svelte';
-	import LayoutGlobalStyles from '../components/LayoutGlobalStyles.svelte';
+
+	import '../components/LayoutTypeSystem.css';
+	import '../components/LayoutGlobalStyles.css';
 
 	export let path: string;
 
 	const pageTransitionDuration = 250;
 </script>
 
-<LayoutGlobalStyles />
-
-<LayoutTypeSystem />
 <LayoutBackgroundColor {path} {pageTransitionDuration} />
 
 <Nav {path} />
