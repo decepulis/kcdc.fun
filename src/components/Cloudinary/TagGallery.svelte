@@ -4,41 +4,19 @@
 
 	import CloudinaryViewer from './Viewer.svelte';
 
-	import { galleryFeatureUrl, galleryStandardUrl, placeholderUrl } from './utils';
-	import type { Photos } from './types';
+	import { gallerySrc, gallerySrcset, placeholderSrc } from './utils';
+	import type { Context, Photos, Resource } from './types';
 
 	export let cloudName: string;
-	export let tag: string;
+	export let photos: Photos;
 
-	// Fetch list of photos
-	let photos: Photos;
-	let publicIds: string[];
-	let featured: Photos;
-	let featuredIds: Set<string>;
+	// Sort list of photos
+	const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+	const sortWithCollator = (resourceA: Resource, resourceB: Resource) =>
+		collator.compare(resourceA.public_id, resourceB.public_id);
+	$: photos.resources.sort(sortWithCollator);
 
 	let imageRefsByPublicId: { [publicId: string]: HTMLImageElement } = {};
-
-	$: {
-		if (typeof photos === 'undefined') break $;
-		publicIds = photos.resources.map((resource) => resource.public_id).sort();
-	}
-	$: {
-		if (typeof featured === 'undefined') break $;
-		featuredIds = new Set(featured.resources.map((resource) => resource.public_id));
-	}
-
-	onMount(async () => {
-		const res = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`);
-		photos = await res.json();
-	});
-	onMount(async () => {
-		const res = await fetch(
-			`https://res.cloudinary.com/${cloudName}/image/list/${tag}-featured.json`
-		);
-		featured = await res.json();
-	});
-
-	$: ready = typeof publicIds !== 'undefined' && typeof featuredIds !== 'undefined';
 
 	// Set up grid
 	// the base width and height as well as the feature width and height
@@ -47,28 +25,41 @@
 	const baseWidth = 100;
 	const heightRatio = 1;
 	const baseHeight = baseWidth * heightRatio;
-
 	const gridGap = 4;
-	const featureRatio = 2;
-	const featureWidth = baseWidth * featureRatio + gridGap;
-	const featureHeight = baseHeight * featureRatio + gridGap;
 
 	// Here, we calculate a width for grid items in order to fit
 	// as many whole number grid items into the available width as possible.
-	let gridOffsetWidth: number;
-	$: targetGridItemCount = Math.floor(gridOffsetWidth / baseWidth);
-	$: totalRowGapWidth = (targetGridItemCount - 1) * gridGap;
-	$: gridWidth = gridOffsetWidth / targetGridItemCount - totalRowGapWidth / targetGridItemCount;
-	$: gridHeight = gridWidth * heightRatio;
+	// let gridOffsetWidth: number;
+	// const minRows = 3;
+	// $: targetGridItemCount = Math.max(Math.floor(gridOffsetWidth / baseWidth), minRows);
+	// $: totalRowGapWidth = (targetGridItemCount - 1) * gridGap;
+	// $: gridWidth = gridOffsetWidth / targetGridItemCount - totalRowGapWidth / targetGridItemCount;
+	// $: gridHeight = gridWidth * heightRatio;
+
+	// For items that have height or width multipliers in their context,
+	// we need these utility functions:
+	const getContextWidthFactor = (context: Context) => {
+		const contextWidth = parseInt(context?.custom.width);
+		return isNaN(contextWidth) ? 1 : contextWidth;
+	};
+	const getContextHeightFactor = (context: Context) => {
+		const contextHeight = parseInt(context?.custom.height);
+		return isNaN(contextHeight) ? 1 : contextHeight;
+	};
+	const getContextWidth = (context: Context) =>
+		baseWidth * getContextWidthFactor(context) + (getContextWidthFactor(context) - 1) * gridGap;
+	const getContextHeight = (context: Context) =>
+		baseHeight * getContextHeightFactor(context) + (getContextHeightFactor(context) - 1) * gridGap;
 
 	// Lazy load photos as they appear
 	let observer: IntersectionObserver | undefined = undefined;
 	let observed = new Set<string>();
+
 	onMount(() => {
 		if (typeof IntersectionObserver === 'undefined') return;
 		const observerConfig: IntersectionObserverInit = {
 			root: null,
-			threshold: [0.25, 0.5]
+			threshold: [0.25, 0.33, 0.5]
 		};
 		observer = new IntersectionObserver((entries, self) => {
 			entries.forEach((entry) => {
@@ -77,14 +68,15 @@
 				const target = entry.target as HTMLImageElement;
 				const { publicid: publicId } = target.dataset;
 
-				// We observed featured images (double-height) at 25%
-				// and standard images at 50%.
+				// We observe standard images at 50%.
+				// and double-height images at 25%
+				// and triple-height images at 16.6% (etc)
 				// This way, a whole row --
 				// i.e., the top half of a featured image and a whole standard image --
 				// loads at once
-				const shouldObserve = featuredIds.has(publicId)
-					? intersectionRatio >= 0.25
-					: intersectionRatio >= 0.5;
+				const observeAt = 0.5 / parseInt(getComputedStyle(target).getPropertyValue('--height'));
+				const shouldObserve = intersectionRatio >= observeAt;
+
 				if (shouldObserve) {
 					// place placeholder in background
 					// and image in source
@@ -97,11 +89,11 @@
 
 		return () => observer.disconnect();
 	});
+
 	$: {
-		if (typeof publicIds === 'undefined') break $;
 		// fallback behavior for those poor IE users
 		if (typeof IntersectionObserver === 'undefined') {
-			observed = new Set(publicIds);
+			observed = new Set(photos.resources.map(({ public_id }) => public_id));
 			break $;
 		}
 
@@ -110,10 +102,11 @@
 		if (typeof observer === 'undefined') break $;
 		if (Object.keys(imageRefsByPublicId).length === 0) break $;
 
-		Object.entries(imageRefsByPublicId).forEach(([publicId, imageRef]) => {
+		Object.values(imageRefsByPublicId).forEach((imageRef) => {
 			observer.observe(imageRef);
 		});
 	}
+
 	let loaded = new Set<string>();
 	const onImageLoad = (e: Event) => {
 		const target = e.target as HTMLImageElement;
@@ -126,46 +119,42 @@
 	<CloudinaryViewer {photos} {cloudName} />
 {/if}
 <div class="photo-container">
-	{#if ready}
-		<ul
-			bind:offsetWidth={gridOffsetWidth}
-			style="--gridWidth:{gridWidth}px;--gridHeight:{gridHeight}px;--gridGap:{gridGap}px;"
-		>
-			{#each publicIds as publicId}
-				<li
-					class:featured={featuredIds.has(publicId)}
-					style="background-image:url({placeholderUrl({ cloudName, publicId })});"
-				>
-					<button aria-label="Open modal with {publicId}" on:click={() => hash.set(publicId)}>
-						<img
-							data-publicid={publicId}
-							class:loaded={loaded.has(publicId)}
-							on:load={onImageLoad}
-							bind:this={imageRefsByPublicId[publicId]}
-							src={observed.has(publicId)
-								? featuredIds.has(publicId)
-									? galleryFeatureUrl({
-											cloudName,
-											publicId,
-											width: featureWidth,
-											height: featureHeight
-									  })
-									: galleryStandardUrl({
-											cloudName,
-											publicId,
-											width: baseWidth,
-											height: baseHeight
-									  })
-								: ''}
-							alt=""
-						/>
-					</button>
-				</li>
-			{/each}
-		</ul>
-	{:else}
-		<p style="text-align:center;">...loading</p>
-	{/if}
+	<ul>
+		{#each photos.resources as { context, public_id: publicId }}
+			<li
+				class:loaded={loaded.has(publicId)}
+				style="
+				--url:url({placeholderSrc({ cloudName, publicId })});
+				--height:{getContextHeightFactor(context)};
+				--width:{getContextWidthFactor(context)};"
+			>
+				<button aria-label="Open modal with {publicId}" on:click={() => hash.set(publicId)}>
+					<img
+						data-publicid={publicId}
+						on:load={onImageLoad}
+						bind:this={imageRefsByPublicId[publicId]}
+						srcset={observed.has(publicId)
+							? gallerySrcset({
+									cloudName,
+									publicId,
+									width: getContextWidth(context),
+									height: getContextHeight(context)
+							  })
+							: ''}
+						src={observed.has(publicId)
+							? gallerySrc({
+									cloudName,
+									publicId,
+									width: getContextWidth(context),
+									height: getContextHeight(context)
+							  })
+							: ''}
+						alt=""
+					/>
+				</button>
+			</li>
+		{/each}
+	</ul>
 </div>
 
 <style>
@@ -185,18 +174,34 @@
 		padding: 0;
 
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(var(--gridWidth), var(--gridWidth)));
-		grid-auto-rows: var(--gridHeight);
+		grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+		grid-auto-rows: 100px;
 		grid-auto-flow: row dense;
-		gap: var(--gridGap);
+		gap: 4px;
+		justify-content: center;
+	}
+	@media (max-width: 340px) {
+		/*
+			I really don't want the gallery to drop below three columns
+			so for very tiny displays, there's this code
+		 */
+		ul {
+			margin-left: calc(-1 * var(--gap));
+			margin-right: calc(-1 * var(--gap));
+		}
 	}
 	li {
 		margin: 0;
-		display: relative;
+		position: relative;
+
+		--height: 1;
+		--width: 1;
+
+		grid-row: span var(--height);
+		grid-column: span var(--width);
 	}
-	.featured {
-		grid-column: span 2;
-		grid-row: span 2;
+	li * {
+		z-index: 10;
 	}
 
 	button {
@@ -214,25 +219,50 @@
 
 		cursor: pointer;
 
-		overflow: hidden;
-		transition: box-shadow var(--transition-duration);
-		box-shadow: 0 0 0 0 rgb(var(--cx));
+		position: relative;
 	}
-	button:hover {
-		box-shadow: 0 0 0 calc(var(--gridGap) * 0.75) rgb(var(--cx));
+	li:before,
+	li:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
-	button:active {
-		box-shadow: 0 0 0 calc(var(--gridGap) * 0.25) rgb(var(--cx));
+	li:after {
+		background-image: var(--url);
+		z-index: 2;
+	}
+	li:before {
+		background-color: rgba(var(--cx), 0);
+
+		transform: scale(1);
+		will-change: transform;
+		transition: transform var(--transition-duration), background-color 0s var(--transition-duration);
+		z-index: 1;
+	}
+	li:hover:before,
+	li:active:before {
+		background-color: rgba(var(--cx), 1);
+		transition: transform var(--transition-duration), background-color 0s 0s;
+	}
+	li:hover:before {
+		transform: scaleX(calc(1 + 0.06 / var(--width))) scaleY(calc(1 + 0.06 / var(--height)));
+	}
+	li:active:before {
+		transform: scaleX(calc(1 + 0.03 / var(--width))) scaleY(calc(1 + 0.03 / var(--height)));
 	}
 
 	img {
 		width: 100%;
-		height: 100%;
+		height: auto;
 
+		position: relative;
 		opacity: 0;
 		transition: opacity var(--transition-duration-long);
 	}
-	img.loaded {
+	.loaded img {
 		opacity: 1;
 	}
 </style>
