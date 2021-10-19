@@ -2,20 +2,23 @@
   "name": "kcdc.fun",
   "version": "0.0.2",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
+    "preview": "svelte-kit preview --host",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "dependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.11",
-    "canvas-confetti": "^1.4.0"
+    "just-kebab-case": "^1.1.0",
+    "mapbox-gl": "^2.5.1"
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
+    "@types/mapbox-gl": "^2.4.2",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "autoprefixer": "^10.3.7",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-svelte3": "^3.2.0",
