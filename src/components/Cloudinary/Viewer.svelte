@@ -54,6 +54,12 @@
 	// Get image URLs and handle loading them
 	$: placeholder = placeholderSrc({ cloudName, publicId: activeId });
 	$: fullSize = fullSizeSrc({ cloudName, publicId: activeId });
+	$: prevImageFullSize = prevAvailable
+		? fullSizeSrc({ cloudName, publicId: publicIds[activeIndex - 1] })
+		: undefined;
+	$: nextImageFullSize = nextAvailable
+		? fullSizeSrc({ cloudName, publicId: publicIds[activeIndex + 1] })
+		: undefined;
 	let loaded = false;
 	$: {
 		// when activeId changes, set loaded to false
@@ -124,6 +130,14 @@
 </script>
 
 <svelte:window on:keydown={onKeydown} />
+<svelte:head>
+	{#if prevImageFullSize}
+		<link rel="preload" as="image" href={prevImageFullSize} />
+	{/if}
+	{#if nextImageFullSize}
+		<link rel="preload" as="image" href={nextImageFullSize} />
+	{/if}
+</svelte:head>
 <div
 	class="modal-container"
 	class:active

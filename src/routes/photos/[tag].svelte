@@ -12,8 +12,7 @@
 			return {
 				props: {
 					photos: await photosResponse.json(),
-					cloudName,
-					tag
+					cloudName
 				}
 			};
 		} else {
@@ -26,20 +25,25 @@
 </script>
 
 <script lang="ts">
+	import { page } from '$app/stores';
+
+	import tags from '../../utilities/photoTags';
+
 	import Gallery from '../../components/Cloudinary/TagGallery.svelte';
 	import type { Photos } from '../../components/Cloudinary/types';
 
 	export let photos: Photos;
 	export let cloudName: string;
-	export let tag: string;
-	$: titleTag = tag.replace('-', ' ');
+
+	let { tag } = $page.params;
+	$: titleTag = tags[tag] ?? tag.replace('-', ' ');
 </script>
 
 <svelte:head>
-	<title>kcdc | {titleTag}</title>
+	<title>{titleTag} | kcdc | Photos</title>
 </svelte:head>
 
-{#if tag === 'kcdc'}
+{#if tag === 'wedding'}
 	<h2>Video</h2>
 	<p class="embed-container">
 		<iframe
@@ -54,7 +58,7 @@
 	</p>
 {/if}
 
-<h2>{tag === 'kcdc' ? 'Photos' : titleTag}</h2>
+<h2>{tag === 'wedding' ? 'Photos' : titleTag}</h2>
 <Gallery {cloudName} {photos} />
 
 <style>

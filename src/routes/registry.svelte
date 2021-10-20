@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>kcdc | Registry</title>
+	<title>Registry | kcdc</title>
 </svelte:head>
 <h1>Registry</h1>
 <p>

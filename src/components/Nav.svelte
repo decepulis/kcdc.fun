@@ -1,25 +1,54 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
+
+	import tags from '../utilities/photoTags';
+
 	export let path: string;
+
+	let isPhotosOpen: false;
+	$: path && (isPhotosOpen = false); // close dropdown on route change
 </script>
 
 <nav>
-	<ul>
+	<ul class="nav-list">
 		<li>
 			<a
 				aria-current={path === '/' ? 'page' : undefined}
 				sveltekit:noscroll
 				sveltekit:prefetch
+				class="nav-item"
+				href="/"
 				style="font-style:italic;"
-				href="/">kcdc</a
 			>
+				kcdc
+			</a>
 		</li>
 		<li>
-			<a
-				aria-current={path === '/photos' ? 'page' : undefined}
-				sveltekit:noscroll
-				sveltekit:prefetch
-				href="/photos">photos</a
+			<label
+				class="nav-item"
+				class:active={isPhotosOpen || path.includes('/photos')}
+				class:open={isPhotosOpen}
 			>
+				<input type="checkbox" bind:checked={isPhotosOpen} />
+				photos
+			</label>
+			{#if isPhotosOpen}
+				<ul class="nav-dropdown" transition:fly={{ duration: 250, y: -10 }}>
+					{#each Object.keys(tags) as tag}
+						<li>
+							<a
+								aria-current={path === `/photos/${tag}` ? 'page' : undefined}
+								class="nav-item"
+								sveltekit:noscroll
+								sveltekit:prefetch
+								href="/photos/{tag}"
+							>
+								{tag}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</li>
 	</ul>
 </nav>
@@ -79,15 +108,15 @@
 			box-shadow var(--page-transition-duration) ease-in-out;
 	}
 
-	ul {
+	.nav-list {
 		margin: 0;
 		padding: 0;
 		padding: 0 env(safe-area-inset-left) 0 env(safe-area-inset-right);
 
 		display: flex;
 	}
-	ul::before,
-	ul:after {
+	.nav-list::before,
+	.nav-list:after {
 		/*
     Here's little gradients at the left and right side of the nav
     that indicate there's more to scroll
@@ -105,18 +134,18 @@
 		box-shadow: 0 0 var(--gap-05) var(--gap-05) rgb(var(--background-color, var(--ssr-color)));
 		transition: box-shadow var(--page-transition-duration) ease-in-out;
 	}
-	ul::before {
+	.nav-list::before {
 		left: calc(-1 * var(--gap));
 	}
-	ul::after {
+	.nav-list::after {
 		right: calc(-1 * var(--gap));
 	}
 
-	li {
+	.nav-list > li {
 		display: block;
 	}
 
-	a {
+	.nav-item {
 		display: block;
 		position: relative;
 		text-decoration: none;
@@ -129,7 +158,7 @@
 		margin-bottom: calc(-1 * var(--gap));
 	}
 
-	a::after {
+	.nav-item::before {
 		position: absolute;
 		content: '';
 		width: calc(100% - var(--gap-2));
@@ -144,19 +173,50 @@
 		transition: opacity var(--transition-duration), transform var(--transition-duration);
 	}
 
-	a:hover {
+	.nav-item:hover {
 		opacity: 0.85;
 	}
-	a:hover::after {
+	.nav-item:hover::before {
 		opacity: 0.85;
 		transform: scaleX(1);
 	}
 
-	a[aria-current] {
+	.nav-item:focus-within,
+	.nav-item.active,
+	.nav-item[aria-current] {
 		opacity: 1;
 	}
-	a[aria-current]::after {
+	.nav-item:focus-within::before,
+	.nav-item.active::before,
+	.nav-item[aria-current]::before {
 		opacity: 1;
 		transform: scaleX(1);
+	}
+
+	label.nav-item {
+		display: inline-block;
+	}
+	label.nav-item:focus-within {
+		outline-style: auto;
+		outline-width: 1px;
+	}
+	label.nav-item::after {
+		content: '\203A';
+		margin-left: 1ch;
+		display: inline-block;
+
+		transform: rotate(0);
+		transition: transform var(--transition-duration);
+	}
+	label.nav-item.open::after {
+		transform: rotate(90deg);
+	}
+	input[type='checkbox'] {
+		appearance: none;
+		position: absolute;
+	}
+	.nav-dropdown {
+		background-color: rgb(var(--background-color, var(--ssr-color)));
+		transition: background-color var(--page-transition-duration) ease-in-out;
 	}
 </style>

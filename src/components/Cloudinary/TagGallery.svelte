@@ -173,11 +173,12 @@
 		margin: 0 auto;
 		padding: 0;
 
+		--grid-gap: 4px;
+
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
-		grid-auto-rows: 100px;
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 		grid-auto-flow: row dense;
-		gap: 4px;
+		gap: var(--grid-gap);
 		justify-content: center;
 	}
 	@media (max-width: 340px) {
@@ -199,14 +200,20 @@
 
 		grid-row: span var(--height);
 		grid-column: span var(--width);
+
+		/* lock aspect ratio */
+		padding-bottom: calc(100% * var(--height) / var(--width));
 	}
 	li * {
 		z-index: 10;
 	}
 
 	button {
+		position: absolute;
 		width: 100%;
 		height: 100%;
+		top: 0;
+		left: 0;
 
 		background: none;
 		border: 0;
@@ -218,8 +225,6 @@
 		color: inherit;
 
 		cursor: pointer;
-
-		position: relative;
 	}
 	li:before,
 	li:after {
@@ -256,7 +261,7 @@
 
 	img {
 		width: 100%;
-		height: auto;
+		height: 100%;
 
 		position: relative;
 		opacity: 0;
