@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-
 	import tags from '../utilities/photoTags';
 
 	export let path: string;
 
-	let isPhotosOpen: false;
+	let isPhotosOpen = false;
 	$: path && (isPhotosOpen = false); // close dropdown on route change
 </script>
 
@@ -24,31 +22,38 @@
 			</a>
 		</li>
 		<li>
+			<input
+				id="photos-dropdown-checkbox"
+				type="checkbox"
+				bind:checked={isPhotosOpen}
+				on:focus={() => (isPhotosOpen = true)}
+				on:blur={() => (isPhotosOpen = false)}
+			/>
 			<label
 				class="nav-item"
-				class:active={isPhotosOpen || path.includes('/photos')}
+				class:active={path.includes('/photos')}
 				class:open={isPhotosOpen}
+				for="photos-dropdown-checkbox"
 			>
-				<input type="checkbox" bind:checked={isPhotosOpen} />
 				photos
 			</label>
-			{#if isPhotosOpen}
-				<ul class="nav-dropdown" transition:fly={{ duration: 250, y: -10 }}>
-					{#each Object.keys(tags) as tag}
-						<li>
-							<a
-								aria-current={path === `/photos/${tag}` ? 'page' : undefined}
-								class="nav-item"
-								sveltekit:noscroll
-								sveltekit:prefetch
-								href="/photos/{tag}"
-							>
-								{tag}
-							</a>
-						</li>
-					{/each}
-				</ul>
-			{/if}
+			<ul class="nav-dropdown">
+				{#each Object.keys(tags) as tag}
+					<li>
+						<a
+							aria-current={path === `/photos/${tag}` ? 'page' : undefined}
+							class="nav-item"
+							sveltekit:noscroll
+							sveltekit:prefetch
+							href="/photos/{tag}"
+							on:focus={() => (isPhotosOpen = true)}
+							on:blur={() => (isPhotosOpen = false)}
+						>
+							{tag}
+						</a>
+					</li>
+				{/each}
+			</ul>
 		</li>
 	</ul>
 </nav>
@@ -181,12 +186,14 @@
 		transform: scaleX(1);
 	}
 
-	.nav-item:focus-within,
+	input:focus ~ .nav-item,
+	input:checked ~ .nav-item,
 	.nav-item.active,
 	.nav-item[aria-current] {
 		opacity: 1;
 	}
-	.nav-item:focus-within::before,
+	input:focus ~ .nav-item::before,
+	input:checked ~ .nav-item::before,
 	.nav-item.active::before,
 	.nav-item[aria-current]::before {
 		opacity: 1;
@@ -196,10 +203,6 @@
 	label.nav-item {
 		display: inline-block;
 	}
-	label.nav-item:focus-within {
-		outline-style: auto;
-		outline-width: 1px;
-	}
 	label.nav-item::after {
 		content: '\203A';
 		margin-left: 1ch;
@@ -208,15 +211,32 @@
 		transform: rotate(0);
 		transition: transform var(--transition-duration);
 	}
-	label.nav-item.open::after {
-		transform: rotate(90deg);
-	}
-	input[type='checkbox'] {
+	input {
 		appearance: none;
 		position: absolute;
 	}
+	input:focus ~ label.nav-item {
+		outline-style: auto;
+		outline-width: 1px;
+	}
+	input:checked ~ label.nav-item::after {
+		transform: rotate(90deg);
+	}
 	.nav-dropdown {
 		background-color: rgb(var(--background-color, var(--ssr-color)));
-		transition: background-color var(--page-transition-duration) ease-in-out;
+		position: relative;
+		top: var(--gap-05);
+
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(calc(-1 * var(--gap-05)));
+		transition: background-color var(--page-transition-duration) ease-in-out,
+			transform var(--transition-duration) ease-in-out,
+			opacity var(--transition-duration) ease-in-out;
+	}
+	input:checked ~ .nav-dropdown {
+		pointer-events: auto;
+		transform: translateY(0);
+		opacity: 1;
 	}
 </style>
