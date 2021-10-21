@@ -326,13 +326,14 @@
 	}
 	.context-content {
 		min-height: calc(100vh / 3);
-		padding: var(--button-gutter-size) var(--button-gutter-size) calc(100vh / 3);
+		padding: var(--button-gutter-size);
 
 		text-shadow: 0 0 10px black;
 		background: linear-gradient(
 			rgba(0, 0, 0, 0),
 			rgba(0, 0, 0, 0.5) var(--button-gutter-size),
-			rgba(0, 0, 0, 1) calc(100% - 100vh / 3)
+			rgba(0, 0, 0, 0.75) calc(100vh / 3),
+			rgba(0, 0, 0, 1)
 		);
 	}
 	.context-content :first-child {

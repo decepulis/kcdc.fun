@@ -55,6 +55,8 @@
 			[main-end]
 			minmax(max(env(safe-area-inset-right), var(--gap)), 1fr)
 			[fullpage-end];
+
+		overflow-x: hidden;
 	}
 
 	main > :global(*) {

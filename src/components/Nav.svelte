@@ -3,8 +3,12 @@
 
 	export let path: string;
 
-	let isPhotosOpen = false;
-	$: path && (isPhotosOpen = false); // close dropdown on route change
+	let isPhotosOpen: boolean;
+	$: {
+		if (path) {
+			isPhotosOpen = false;
+		}
+	}
 </script>
 
 <nav>
@@ -22,13 +26,7 @@
 			</a>
 		</li>
 		<li>
-			<input
-				id="photos-dropdown-checkbox"
-				type="checkbox"
-				bind:checked={isPhotosOpen}
-				on:focus={() => (isPhotosOpen = true)}
-				on:blur={() => (isPhotosOpen = false)}
-			/>
+			<input id="photos-dropdown-checkbox" type="checkbox" bind:checked={isPhotosOpen} />
 			<label
 				class="nav-item"
 				class:active={path.includes('/photos')}
@@ -46,8 +44,6 @@
 							sveltekit:noscroll
 							sveltekit:prefetch
 							href="/photos/{tag}"
-							on:focus={() => (isPhotosOpen = true)}
-							on:blur={() => (isPhotosOpen = false)}
 						>
 							{tag}
 						</a>
