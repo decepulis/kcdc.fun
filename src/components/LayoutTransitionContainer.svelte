@@ -11,6 +11,9 @@
 	const halfDuration = pageTransitionDuration / 2;
 
 	let y: number;
+	const scrollToTop = () => {
+		y = 0;
+	};
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -19,6 +22,7 @@
 	<main
 		in:fade={{ duration: halfDuration, delay: halfDuration }}
 		out:fade={{ duration: halfDuration }}
+		on:outroend={scrollToTop}
 	>
 		<slot />
 	</main>
