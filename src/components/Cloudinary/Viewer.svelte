@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scale, fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	import { hash } from '../../stores/hash';
 	import { fullSizeSrc, placeholderSrc } from './utils';
@@ -52,7 +52,6 @@
 	$: sizeByWidth = imgRatio > containerRatio;
 
 	// Get image URLs and handle loading them
-	$: placeholder = placeholderSrc({ cloudName, publicId: activeId });
 	$: fullSize = fullSizeSrc({ cloudName, publicId: activeId });
 	$: prevImageFullSize = prevAvailable
 		? fullSizeSrc({ cloudName, publicId: publicIds[activeIndex - 1] })
@@ -61,12 +60,7 @@
 		? fullSizeSrc({ cloudName, publicId: publicIds[activeIndex + 1] })
 		: undefined;
 	let loaded = false;
-	$: {
-		// when activeId changes, set loaded to false
-		if (activeId) {
-			loaded = false;
-		}
-	}
+	$: $hash && (loaded = false); // set loaded to false when hash changes
 
 	// And some click listeners
 	let containerElement: HTMLElement;
@@ -86,13 +80,6 @@
 	};
 	const toggleContext = () => {
 		isContextVisible = !isContextVisible;
-	};
-	const onContainerClick = (e: MouseEvent) => {
-		// if click is on backdrop and not child...
-		if (e.target === e.currentTarget) {
-			// close the operation down
-			closeModal();
-		}
 	};
 	const onKeydown = (e: KeyboardEvent) => {
 		if (typeof activeId === 'undefined') return;
@@ -142,22 +129,21 @@
 	class="modal-container"
 	class:active
 	aria-modal={active}
-	on:click={onContainerClick}
 	bind:offsetWidth={containerWidth}
 	bind:offsetHeight={containerHeight}
 	bind:this={containerElement}
 >
 	{#if active}
-		<div
-			class="image-container"
-			class:size-by-width={sizeByWidth}
-			style="--width:{imgWidth};--height:{imgHeight};background-image:url({placeholder});"
-			transition:scale={{ duration: 300, start: 0.85, opacity: 1 }}
-		>
-			<img src={fullSize} on:load={() => (loaded = true)} class:loaded alt="" />
-		</div>
-		{#if hasContext && isContextVisible}
-			{#key activeId}
+		{#key activeId}
+			<div
+				class="image-container"
+				class:size-by-width={sizeByWidth}
+				style="--width:{imgWidth};--height:{imgHeight};"
+				transition:fade={{ duration: 150 }}
+			>
+				<img src={fullSize} on:load={() => (loaded = true)} class:loaded alt="" />
+			</div>
+			{#if hasContext && isContextVisible}
 				<div class="context-container" transition:fly={{ y: 100 }}>
 					<div class="context-content">
 						{#if typeof activeContext.custom.caption !== 'undefined'}
@@ -174,8 +160,8 @@
 						{/if}
 					</div>
 				</div>
-			{/key}
-		{/if}
+			{/if}
+		{/key}
 	{/if}
 	<button
 		on:click={prevImage}
@@ -213,9 +199,9 @@
 	.modal-container {
 		position: fixed;
 		z-index: 10000;
+		height: 100vh;
+		width: 100vw;
 		top: 0;
-		right: 0;
-		bottom: 0;
 		left: 0;
 
 		pointer-events: none;
@@ -223,10 +209,6 @@
 		background-color: rgba(0, 0, 0, 0.75);
 		backdrop-filter: blur(5px);
 		transition: opacity var(--transition-duration-long);
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
 
 		--button-size: 3rem;
 		--button-padding: 1rem;
@@ -299,18 +281,24 @@
 	}
 
 	.image-container {
-		position: relative;
+		position: absolute;
 		cursor: auto;
+		/* I'd use placeholder, but I can't fade it in on load */
+		background-color: black;
 	}
 	.image-container:not(.size-by-width) {
-		--image-height: 100vh;
-		height: var(--image-height);
-		padding-left: calc(var(--image-height) * var(--width) / var(--height));
+		height: 100vh;
+		top: 0;
+		width: calc(100vh * var(--width) / var(--height));
+		left: 50%;
+		transform: translateX(-50%);
 	}
 	.image-container.size-by-width {
-		--image-width: 100vw;
-		width: var(--image-width);
-		padding-bottom: calc(var(--image-width) * var(--height) / var(--width));
+		width: 100vw;
+		left: 0;
+		height: calc(100vw * var(--height) / var(--width));
+		top: 50%;
+		transform: translateY(-50%);
 	}
 	img {
 		position: absolute;
@@ -324,27 +312,27 @@
 	}
 	img.loaded {
 		opacity: 1;
-		transition: opacity var(--transition-duration-long);
+		transition: opacity var(--transition-duration);
 	}
 
 	.context-container {
-		position: absolute;
+		position: fixed;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		top: 0;
+		height: 100vh;
 		padding-top: 80vh;
 		overflow-y: scroll;
 	}
 	.context-content {
 		min-height: calc(100vh / 3);
-		padding: var(--button-gutter-size) var(--button-gutter-size) var(--button-padding);
+		padding: var(--button-gutter-size) var(--button-gutter-size) calc(100vh / 3);
 
 		text-shadow: 0 0 10px black;
 		background: linear-gradient(
 			rgba(0, 0, 0, 0),
 			rgba(0, 0, 0, 0.5) var(--button-gutter-size),
-			rgba(0, 0, 0, 1)
+			rgba(0, 0, 0, 1) calc(100% - 100vh / 3)
 		);
 	}
 	.context-content :first-child {
