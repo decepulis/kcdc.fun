@@ -139,7 +139,7 @@
 				class="image-container"
 				class:size-by-width={sizeByWidth}
 				style="--width:{imgWidth};--height:{imgHeight};"
-				transition:fade={{ duration: 150 }}
+				transition:fade={{ duration: 250 }}
 			>
 				<img src={fullSize} on:load={() => (loaded = true)} class:loaded alt="" />
 			</div>
@@ -267,6 +267,8 @@
 		top: 0;
 		bottom: 0;
 		font-size: 2rem;
+
+		touch-action: manipulation; /* disable double tap to zoom */
 	}
 	.next-button {
 		right: 0;
@@ -309,7 +311,7 @@
 	}
 	img.loaded {
 		opacity: 1;
-		transition: opacity var(--transition-duration);
+		transition: opacity 250ms;
 	}
 
 	.context-container {
@@ -318,7 +320,7 @@
 		right: 0;
 		bottom: 0;
 		height: 100vh;
-		padding-top: 80vh;
+		padding-top: 85vh;
 		overflow-y: scroll;
 	}
 	.context-content {
