@@ -121,8 +121,14 @@
 <div class="photo-container">
 	<ul>
 		{#each photos.resources as { context, public_id: publicId }}
+			{#if context?.custom.caption}
+				<li class="photo-caption" style="--url:url({placeholderSrc({ cloudName, publicId })});">
+					<h3 class="h5 i">{context.custom.caption}</h3>
+				</li>
+			{/if}
 			<li
 				class:loaded={loaded.has(publicId)}
+				class="photo-list-item"
 				style="
 				--url:url({placeholderSrc({ cloudName, publicId })});
 				--height:{getContextHeightFactor(context)};
@@ -191,7 +197,7 @@
 			margin-right: calc(-1 * var(--gap));
 		}
 	}
-	li {
+	.photo-list-item {
 		margin: 0;
 		position: relative;
 
@@ -204,7 +210,28 @@
 		/* lock aspect ratio */
 		padding-bottom: calc(100% * var(--height) / var(--width));
 	}
-	li * {
+	.photo-caption {
+		grid-column: span 2;
+
+		margin: 0;
+		padding: var(--gap);
+
+		text-align: right;
+		text-shadow: 0 0 3px black;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		background-color: white;
+		background-image: var(--url);
+		position: relative;
+	}
+	.photo-caption * {
+		margin: 0;
+		padding: 0;
+		z-index: 10;
+	}
+	.photo-list-item * {
 		z-index: 10;
 	}
 
@@ -226,8 +253,8 @@
 
 		cursor: pointer;
 	}
-	li:before,
-	li:after {
+	.photo-list-item:before,
+	.photo-list-item:after {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -235,11 +262,11 @@
 		right: 0;
 		bottom: 0;
 	}
-	li:after {
+	.photo-list-item:after {
 		background-image: var(--url);
 		z-index: 2;
 	}
-	li:before {
+	.photo-list-item:before {
 		background-color: rgba(var(--cx), 0);
 
 		transform: scale(1);
@@ -247,15 +274,15 @@
 		transition: transform var(--transition-duration), background-color 0s var(--transition-duration);
 		z-index: 1;
 	}
-	li:hover:before,
-	li:active:before {
+	.photo-list-item:hover:before,
+	.photo-list-item:active:before {
 		background-color: rgba(var(--cx), 1);
 		transition: transform var(--transition-duration), background-color 0s 0s;
 	}
-	li:hover:before {
+	.photo-list-item:hover:before {
 		transform: scaleX(calc(1 + 0.06 / var(--width))) scaleY(calc(1 + 0.06 / var(--height)));
 	}
-	li:active:before {
+	.photo-list-item:active:before {
 		transform: scaleX(calc(1 + 0.03 / var(--width))) scaleY(calc(1 + 0.03 / var(--height)));
 	}
 

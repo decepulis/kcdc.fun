@@ -146,9 +146,6 @@
 			{#if hasContext && isContextVisible}
 				<div class="context-container" transition:fly={{ y: 100 }}>
 					<div class="context-content">
-						{#if typeof activeContext.custom.caption !== 'undefined'}
-							<h3>{activeContext.custom.caption}</h3>
-						{/if}
 						{#if typeof activeContext.custom.alt !== 'undefined'}
 							<p>{activeContext.custom.alt}</p>
 						{/if}
