@@ -209,6 +209,7 @@
 	}
 	input {
 		appearance: none;
+		opacity: 0;
 		position: absolute;
 	}
 	input:focus ~ label.nav-item {
