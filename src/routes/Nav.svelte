@@ -67,6 +67,7 @@
 		z-index: 1000;
 		background-color: rgb(var(--c1));
 		box-shadow: 0 0.25rem 0.5rem 0.5rem rgb(var(--c1));
+		padding-top: 1rem;
 	}
 
 	.nav-list {
@@ -89,14 +90,18 @@
 		color: white;
 		opacity: 0.8;
 		transition: opacity var(--transition-duration);
-		padding: 0.5rem 1rem;
+		padding: 1rem;
+	}
+	.nav-list > li > .nav-item {
+		/* It's important that top-level nav items don't make the nav taller than necessary */
+		margin: -1rem 0;
 	}
 
 	.nav-item::before {
 		position: absolute;
 		content: '';
 		width: calc(100% - 2rem);
-		height: var(--border);
+		height: 2px;
 		background-color: rgb(var(--cx));
 		display: block;
 		bottom: 1rem;
@@ -160,7 +165,7 @@
 		background-color: rgb(var(--c2));
 		border-top: none;
 		position: absolute;
-		top: 100%;
+		top: calc(100% + 1rem);
 		padding: 0;
 		list-style-type: none;
 
