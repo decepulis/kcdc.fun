@@ -1,7 +1,11 @@
-.env
 .DS_Store
 node_modules
-.svelte-kit
-build
-functions
-.netlify
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+
+# The studio will be built in static/studio, which shouldn't be commited
+/static/studio

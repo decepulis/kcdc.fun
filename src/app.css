@@ -1,0 +1,79 @@
+/* -- Variables -- */
+:root {
+	--c1: 39, 36, 66;
+	--c2: 55, 50, 93;
+	--c3: 71, 64, 119;
+	--c4: 87, 79, 146;
+	--c5: 105, 96, 169;
+	--cx: 241, 181, 125;
+
+	--transition-duration: 150ms;
+	--transition-duration-long: 300ms;
+}
+
+/* -- Spacing -- */
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+/* -- Appearance -- */
+html,
+body {
+	background-color: rgb(var(--c1));
+}
+*,
+*:before,
+*:after {
+	outline-color: rgb(var(--cx));
+}
+*::selection {
+	background: rgba(var(--cx), 0.8);
+	color: rgba(var(--c1), 1);
+}
+
+/* -- Utilities -- */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.layout-container {
+	max-width: 84rem;
+	margin: 0 auto;
+}
+
+/* -- Typography -- */
+html {
+	font-size: 100%;
+}
+
+body {
+	font-family: 'Courier Prime', monospace;
+	font-weight: 400;
+	line-height: 1.75;
+	color: #ffffff;
+}
+a {
+	color: inherit;
+	text-decoration-style: solid;
+	text-decoration-color: rgb(var(--cx));
+}
+a:hover {
+	text-decoration-style: wavy;
+	text-decoration-color: rgb(var(--cx));
+}
