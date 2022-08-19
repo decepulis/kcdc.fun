@@ -16,7 +16,7 @@
 	};
 
 	const removeStuffAtTheEndOfLens = (lens: string) => {
-		const stuff = /\d+.\d+mm f\/\d+.\d+$/;
+		const stuff = / \d+\.*\d*mm f\/\d+\.*\d*$/;
 		const match = lens.match(stuff);
 		return match ? lens.slice(0, match.index) : lens;
 	};
