@@ -1,4 +1,3 @@
-import { dev } from '$app/env';
 import sanityClient from '@sanity/client';
 
 import { api } from '../../../studio/sanity.json';
@@ -8,7 +7,7 @@ export const client = sanityClient({
 	projectId,
 	dataset,
 	apiVersion: '2022-05-31',
-	useCdn: !dev
+	useCdn: false // the builds are static, anyways
 });
 
 interface Document {
