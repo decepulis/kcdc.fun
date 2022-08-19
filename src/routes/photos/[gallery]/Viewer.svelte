@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import A11yDialog from 'a11y-dialog';
+	import { XIcon } from 'svelte-feather-icons';
 
 	import type { GalleryItem } from '$lib/queries/routes/photos/[gallery]';
 	import { isDialogOpen, scrollToKey, activeKey } from '$lib/stores/viewer';
@@ -8,14 +9,12 @@
 
 	import ViewerScroll from './ViewerScroll.svelte';
 	import ViewerOverlay from './ViewerOverlay.svelte';
-	import ViewerControls from './ViewerControls.svelte';
 
 	export let items: GalleryItem[];
 	let itemKeys = items.map((item) => item._key);
 
 	let container: HTMLDivElement;
 	let dialog: A11yDialog;
-	let showOverlay: boolean;
 
 	onMount(async () => {
 		// We do two things on mount.
@@ -59,12 +58,17 @@
 	<div class="content" role="document">
 		{#if $isDialogOpen}
 			<ViewerScroll {items} />
-			{#if showOverlay}
-				<ViewerOverlay {items} />
-			{/if}
+			<ViewerOverlay {items} />
 		{/if}
-		<ViewerControls {items} bind:showOverlay />
 	</div>
+	<button
+		class="close control"
+		type="button"
+		on:click={() => ($isDialogOpen = false)}
+		aria-label="Close dialog"
+	>
+		<XIcon />
+	</button>
 </div>
 
 <style>
@@ -93,5 +97,47 @@
 	}
 	.content {
 		z-index: 1;
+	}
+	.container :global(.control) {
+		width: 2rem;
+		height: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 2rem;
+		border: none;
+		border-radius: 50%;
+		appearance: none;
+		background: none;
+		padding: 0;
+		margin: 0.5rem;
+		cursor: pointer;
+		color: #fff;
+		z-index: 2;
+		position: relative;
+		transition: color var(--transition-duration), background-color var(--transition-duration),
+			opacity var(--transition-duration), transform var(--transition-duration);
+	}
+	.container :global(.control:after) {
+		content: '';
+		position: absolute;
+		inset: -0.5rem;
+	}
+	.container :global(.control:disabled) {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+	.container :global(.control:not([disabled]):hover) {
+		color: rgb(var(--cx));
+	}
+	.container :global(.control:not([disabled]).active) {
+		background-color: rgb(var(--cx));
+		color: rgb(var(--c1));
+	}
+
+	.close.control {
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 </style>

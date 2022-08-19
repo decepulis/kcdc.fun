@@ -15,6 +15,12 @@
 		});
 	};
 
+	const removeStuffAtTheEndOfLens = (lens: string) => {
+		const stuff = /\d+.\d+mm f\/\d+.\d+$/;
+		const match = lens.match(stuff);
+		return match ? lens.slice(0, match.index) : lens;
+	};
+
 	const APEXtoShutterSpeed = (apex: number) => {
 		const shutterSpeed = Math.pow(2, -apex);
 		if (shutterSpeed >= 1) {
@@ -23,7 +29,6 @@
 			return `1/${Math.round(1 / shutterSpeed)} s`;
 		}
 	};
-	console.log({ exif });
 </script>
 
 <div class="exif">
@@ -31,7 +36,7 @@
 		<div class="datetime">{fmtTime(exif.DateTimeOriginal)}</div>
 	{/if}
 	{#if exif.LensMake && exif.LensModel}
-		<div class="lens">{exif.LensMake} {exif.LensModel}</div>
+		<div class="lens">{exif.LensMake} {removeStuffAtTheEndOfLens(exif.LensModel)}</div>
 	{/if}
 	<div class="details">
 		{#if exif.ISO}
