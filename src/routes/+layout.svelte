@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import type { LayoutData } from '.svelte-kit/types/src/routes/$types';
+
 	import '../app.css';
 	import Nav from './Nav.svelte';
+
+	export let data: LayoutData;
 </script>
 
-<Nav path={$page.url.pathname} />
+<Nav galleries={data.galleries} />
 <main>
 	<slot />
 </main>

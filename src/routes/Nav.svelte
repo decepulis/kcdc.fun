@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { dataset_dev } from 'svelte/internal';
+	import type { GalleryListDocument } from '$lib/queries/routes/+layout';
 
-	export let path: string;
+	export let galleries: GalleryListDocument[];
+
+	$: path = $page.url.pathname;
 
 	let isPhotosOpen: boolean;
-	$: {
-		// on navigation...
-		if (path) {
-			// ...close the photos menu
+	const onWindowClick = () => {
+		// there really isn't a case where this isn't true.
+		if (isPhotosOpen) {
 			isPhotosOpen = false;
 		}
-	}
+	};
 </script>
 
+<svelte:window on:click={onWindowClick} />
 <nav>
 	<ul class="nav-list">
 		<li>
@@ -36,19 +38,17 @@
 				photos
 			</label>
 			<ul class="nav-dropdown">
-				{#if $page.data.galleries}
-					{#each $page.data.galleries as gallery}
-						<li>
-							<a
-								aria-current={path === `/photos/${gallery.slug.current}` ? 'page' : undefined}
-								class="nav-item"
-								href="/photos/{gallery.slug.current}"
-							>
-								{gallery.title}
-							</a>
-						</li>
-					{/each}
-				{/if}
+				{#each galleries as gallery}
+					<li>
+						<a
+							aria-current={path === `/photos/${gallery.slug.current}` ? 'page' : undefined}
+							class="nav-item"
+							href="/photos/{gallery.slug.current}"
+						>
+							{gallery.title}
+						</a>
+					</li>
+				{/each}
 			</ul>
 		</li>
 	</ul>

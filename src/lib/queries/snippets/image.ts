@@ -14,6 +14,7 @@ export default /* groq */ `{
         DateTimeOriginal,
         FNumber,
         FocalLength,
+        FocalLengthIn35mmFormat,
         ISO,
         LensMake,
         LensModel,
@@ -41,17 +42,18 @@ interface Dimensions {
 	height: number;
 	width: number;
 }
-interface Exif {
+export interface Exif {
 	DateTimeDigitized: string | null;
 	DateTimeOriginal: string | null;
 	FNumber: number | null;
 	FocalLength: number | null;
+	FocalLengthIn35mmFormat: number | null;
 	ISO: number | null;
 	LensMake: string | null;
 	LensModel: string | null;
 	ShutterSpeedValue: number | null;
 }
-interface Geopoint {
+export interface Geopoint {
 	latitude: number | null;
 	longitude: number | null;
 	altitude: number | null;
