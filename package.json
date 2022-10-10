@@ -4,15 +4,14 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "package": "svelte-kit package",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "build:studio": "cd studio && yarn build",
     "dev:studio": "cd studio && yarn start",
     "start:studio": "cd studio && yarn start",
-    "lint": "prettier --check --plugin-search-dir=. . && eslint .",
-    "format": "prettier --write --plugin-search-dir=. ."
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
@@ -33,7 +32,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@mux/mux-player": "^0.1.0-beta.26",
+    "@mux/mux-player": "^1.1.0",
     "@sanity/client": "^3.3.1",
     "@sanity/image-url": "^1.0.1",
     "a11y-dialog": "^7.5.2",

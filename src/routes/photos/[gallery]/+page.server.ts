@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { dev } from '$app/env';
+import { dev } from '$app/environment';
 
 import { client, overlayDrafts } from '$lib/sanity/server';
 import query, { type GalleryDocument } from '$lib/queries/routes/photos/[gallery]';

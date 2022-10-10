@@ -17,3 +17,5 @@ export const load: LayoutServerLoad = async () => {
 
 	throw error(404, 'Not found');
 };
+
+export const prerender = true;

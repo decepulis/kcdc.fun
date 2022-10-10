@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	// let's keep track of which items are currently on screen.
 	// this enables two things:
 	// 1. updating the currentItem state
