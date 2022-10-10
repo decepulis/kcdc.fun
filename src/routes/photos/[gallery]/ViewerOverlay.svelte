@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { InfoIcon, ChevronUpIcon } from 'svelte-feather-icons';
 
 	import {
@@ -17,8 +17,6 @@
 
 	let showOverlay = true;
 	let expandOverlay = false;
-	// whenever the activeItem changes, collapse the overlay
-	$: if (activeItem) expandOverlay = false;
 
 	// detect keyboard up arrow to expand overlay
 	const onKeyUp = (e: KeyboardEvent) => {
@@ -45,7 +43,7 @@
 			class="overlay"
 			class:expanded={expandOverlay}
 			on:click={() => (expandOverlay = !expandOverlay)}
-			transition:fly={{ y: 15 }}
+			transition:fade={{ duration: 100 }}
 		>
 			<button
 				class="expand-overlay control"
@@ -55,8 +53,10 @@
 				on:click={(e) => {
 					expandOverlay = !expandOverlay;
 					e.stopImmediatePropagation();
-				}}><ChevronUpIcon /></button
+				}}
 			>
+				<ChevronUpIcon />
+			</button>
 			{#if activeItem.description}
 				<div class="description">
 					{activeItem.description}
@@ -71,14 +71,7 @@
 <button
 	class="show-overlay control"
 	type="button"
-	on:click={() => {
-		if (showOverlay) {
-			showOverlay = false;
-			expandOverlay = false;
-		} else {
-			showOverlay = true;
-		}
-	}}
+	on:click={() => (showOverlay = !showOverlay)}
 	class:active={showOverlay}
 	aria-label="Show photo information"
 >
@@ -87,6 +80,8 @@
 
 <style>
 	.overlay {
+		font-size: 0.9em;
+
 		position: fixed;
 		left: 0;
 		right: 0;
@@ -117,6 +112,7 @@
 	}
 	@media (min-width: 64rem) {
 		.overlay {
+			font-size: 1em;
 			grid-template-columns: auto auto;
 		}
 	}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Exif } from '$lib/queries/snippets/image';
+	import { slide } from 'svelte/transition';
 
 	export let exif: Exif;
 
