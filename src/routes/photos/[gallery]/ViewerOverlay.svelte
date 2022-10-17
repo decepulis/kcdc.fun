@@ -43,6 +43,7 @@
 			class="overlay"
 			class:expanded={expandOverlay}
 			on:click={() => (expandOverlay = !expandOverlay)}
+			on:keypress={() => (expandOverlay = !expandOverlay)}
 			transition:fade={{ duration: 100 }}
 		>
 			<button
