@@ -12,7 +12,8 @@
 </main>
 
 <style>
-	main {
+	main,
+	main :global(.main) {
 		padding: 0 1rem;
 	}
 	main :global(.anti-main) {
@@ -20,7 +21,8 @@
 		margin-right: -1rem;
 	}
 	@supports (padding: max(1rem, env(safe-area-inset-left))) {
-		main {
+		main,
+		main :global(.main) {
 			padding: 0 max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-bottom))
 				max(1rem, env(safe-area-inset-right));
 		}

@@ -26,7 +26,7 @@
 
 <svelte:window bind:scrollY />
 
-<div class="parallax-container anti-main">
+<section class="anti-main parallax-container">
 	{#each layers as layer, layerIndex}
 		{#if layerIndex === 0}
 			<!-- first layer fixed to 0,0 -->
@@ -44,13 +44,15 @@
 			<div style="background-image: url({layer}); position: absolute;" />
 		{/if}
 	{/each}
-</div>
-
-<section class="layout-container content">
-	<h1>The Adventures of Kristin & Darius</h1>
-	<h2>Photos</h2>
-	<Galleries />
 </section>
+
+<div class="anti-main content">
+	<section class="main layout-container">
+		<h1>The Adventures of Kristin & Darius</h1>
+		<h2>Photos</h2>
+		<Galleries />
+	</section>
+</div>
 
 <style>
 	:global(html) {
@@ -64,6 +66,7 @@
     all the way to the top of the page;
     only to the top of the box shadow in the nav bar
     */
+		--gap: 1rem;
 		margin-top: calc(-1 * var(--gap));
 
 		--layer-height: calc(100vh - var(--nav-height) + var(--gap));
@@ -76,8 +79,6 @@
 		background-color: rgb(var(--c1));
 
 		position: relative;
-
-		grid-column: fullpage-start / fullpage-end;
 	}
 
 	.parallax-container div {
@@ -106,11 +107,6 @@
     the background color around the content
      */
 		background-color: rgb(var(--background-color, var(--ssr-color)));
-		margin-left: calc(-50vw + 50%);
-		margin-right: calc(-50vw + 50%);
-		padding-left: calc(50vw - 50%);
-		padding-right: calc(50vw - 50%);
-
 		/*
     And to make sure we have some room at the bottom
     */
