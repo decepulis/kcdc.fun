@@ -7,10 +7,17 @@
 	$: path = $page.url.pathname;
 
 	let isPhotosOpen: boolean;
-	const onWindowClick = () => {
-		// there really isn't a case where this isn't true.
+	const onWindowClick = (e: MouseEvent) => {
 		if (isPhotosOpen) {
-			isPhotosOpen = false;
+			// if this isn't the input itself...
+			const isInput =
+				e.target instanceof HTMLInputElement && e.target.id === 'photos-dropdown-checkbox';
+			const isLabel =
+				e.target instanceof HTMLLabelElement && e.target.htmlFor === 'photos-dropdown-checkbox';
+			if (!isInput && !isLabel) {
+				// ...close the dropdown
+				isPhotosOpen = false;
+			}
 		}
 	};
 </script>
