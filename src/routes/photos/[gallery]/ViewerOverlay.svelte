@@ -39,11 +39,12 @@
 <svelte:window on:keyup={onKeyUp} />
 {#if showOverlay && activeItem && !isGalleryTitle(activeItem) && (isGalleryPhoto(activeItem) || activeItem.description)}
 	{#key activeItem._key}
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="overlay"
 			class:expanded={expandOverlay}
-			on:click={() => (expandOverlay = !expandOverlay)}
-			on:keypress={() => (expandOverlay = !expandOverlay)}
+			on:click={() => (expandOverlay = false)}
+			on:keypress={() => (expandOverlay = false)}
 			transition:fade={{ duration: 100 }}
 		>
 			<button
@@ -52,7 +53,7 @@
 				aria-label="expand-overlay"
 				class:active={expandOverlay}
 				on:click={(e) => {
-					expandOverlay = !expandOverlay;
+					expandOverlay = false;
 					e.stopImmediatePropagation();
 				}}
 			>

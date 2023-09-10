@@ -37,7 +37,9 @@
 			$scrollToKey = $hash;
 		}
 
-		return () => dialog.destroy();
+		return () => {
+			dialog.destroy();
+		};
 	});
 
 	// Here, we reactively listen to the $isDialogOpen variable

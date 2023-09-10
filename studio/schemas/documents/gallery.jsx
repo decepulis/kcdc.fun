@@ -134,6 +134,20 @@ const gallery = {
 	type: 'document',
 	title: 'Gallery',
 	icon: FaPhotoVideo,
+	preview: {
+		select: {
+			title: 'title',
+			startDate: 'startDate',
+			featuredPhoto: 'featuredPhoto'
+		},
+		prepare: ({ title, startDate, featuredPhoto }) => {
+			return {
+				title,
+				subtitle: startDate,
+				media: featuredPhoto
+			};
+		}
+	},
 	fields: [
 		{
 			name: 'title',
@@ -152,6 +166,18 @@ const gallery = {
 			validation: (Rule) => Rule.required()
 		},
 		{
+			name: 'startDate',
+			title: 'Start Date',
+			type: 'date',
+			validation: (Rule) => Rule.required()
+		},
+		{
+			name: 'endDate',
+			title: 'End Date',
+			type: 'date',
+			validation: (Rule) => Rule.required()
+		},
+		{
 			name: 'featuredPhoto',
 			title: 'Featured Photo',
 			type: 'image',
@@ -165,7 +191,9 @@ const gallery = {
 			name: 'items',
 			title: 'Items',
 			type: 'array',
-			inputComponent: GalleryUploadArray,
+			components: {
+				input:GalleryUploadArray
+			},
 			of: [galleryVideo, galleryPhoto, galleryTitle]
 		}
 	]

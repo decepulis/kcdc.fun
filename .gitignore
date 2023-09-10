@@ -9,3 +9,5 @@ node_modules
 
 # The studio will be built in static/studio, which shouldn't be commited
 /static/studio
+studio/.sanity/runtime/index.html
+studio/.sanity/runtime/app.js

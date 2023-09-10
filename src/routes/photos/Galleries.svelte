@@ -21,6 +21,7 @@
 					/>
 				</div>
 				<h3>{gallery.title}</h3>
+				<p>{gallery.startDate}</p>
 			</a>
 		</li>
 	{/each}
@@ -57,6 +58,9 @@
 		display: block;
 	}
 	.gallery h3 {
+		margin: 0;
+	}
+	.gallery p {
 		margin: 0;
 	}
 </style>

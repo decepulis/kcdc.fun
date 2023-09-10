@@ -1,10 +1,11 @@
 import imageSnippet, { type ReferencedSanityImageObject } from '$lib/queries/snippets/image';
 
 const query = /* groq */ `
-  *[_type == "gallery"] {
+  *[_type == "gallery"] | order(startDate desc) {
     _id,
     slug,
     title,
+    startDate,
     featuredPhoto ${imageSnippet}
   }
 `;
@@ -12,7 +13,8 @@ const query = /* groq */ `
 export interface GalleryListDocument {
 	_id: string;
 	slug: { current: string };
-	title: string;
+  title: string;
+  startDate: string;
 	featuredPhoto: ReferencedSanityImageObject;
 }
 

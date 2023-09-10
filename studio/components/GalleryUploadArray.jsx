@@ -1,13 +1,10 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDropzone } from 'react-dropzone';
 import * as exifr from 'exifr';
 
-import sanityClient from 'part:@sanity/base/client';
-import { FormBuilderInput } from '@sanity/form-builder/lib/FormBuilderInput';
-import { withDocument } from 'part:@sanity/form-builder';
-
-const client = sanityClient.withConfig({ apiVersion: '2022-05-31' });
+import { useClient, useFormValue } from 'sanity'
+import { Stack } from '@sanity/ui';
 
 const dragRootStyle = {
 	height: '100px',
@@ -24,13 +21,24 @@ const dragRootActiveStyle = {
 	border: '1px dashed #2196f3'
 };
 
-const GalleryUploadArray = withDocument(
-	forwardRef((props, ref) => {
-		// destructure props for easier use
-		const { type, document, ...rest } = props;
-		const { _id } = document;
+const GalleryUploadArray = (props) => {
+	const _id = useFormValue(['_id'])
 
-		const [uploadProgress, setUploadProgress] = useState(null);
+		const client = useClient({ apiVersion: '2022-05-31' });
+
+	const [uploadProgress, setUploadProgress] = useState(null);
+	
+	useEffect(() => {
+		const beforeUnload = (e) => {
+			if (uploadProgress !== null) {
+				e.preventDefault();
+				e.returnValue = '';
+			}
+		};
+		window.addEventListener('beforeunload', beforeUnload);
+		return () => window.removeEventListener('beforeunload', beforeUnload);
+	}, [])
+
 		const onDrop = useCallback(async (acceptedFiles) => {
 			setUploadProgress(`0 / ${acceptedFiles.length}`);
 			try {
@@ -77,24 +85,19 @@ const GalleryUploadArray = withDocument(
 		}, []);
 		const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-		// remove inputComponent property to prevent infinite loop caused by
-		// FormBuilderInput resolving to WrappedDefaultInput again and again.
-		const { inputComponent: _, ...restOfType } = type;
-
 		return (
-			<>
-				<FormBuilderInput type={restOfType} ref={ref} {...rest} />
+			<Stack space={3}>
 				<div {...getRootProps()} style={isDragActive ? dragRootActiveStyle : dragRootStyle}>
 					<input {...getInputProps()} disabled={uploadProgress !== null} />
 					{uploadProgress !== null ? (
 						<p>{uploadProgress}</p>
 					) : (
-						<p>Drag 'n' drop some files here, or click to select files</p>
+						<p>Drag 'n' drop or click to select files</p>
 					)}
 				</div>
-			</>
+				{props.renderDefault(props)}
+				</Stack>
 		);
-	})
-);
+	}
 
 export default GalleryUploadArray;
