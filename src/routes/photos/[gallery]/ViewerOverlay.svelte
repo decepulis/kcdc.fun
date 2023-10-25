@@ -40,20 +40,14 @@
 {#if showOverlay && activeItem && !isGalleryTitle(activeItem) && (isGalleryPhoto(activeItem) || activeItem.description)}
 	{#key activeItem._key}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div
-			class="overlay"
-			class:expanded={expandOverlay}
-			on:click={() => (expandOverlay = false)}
-			on:keypress={() => (expandOverlay = false)}
-			transition:fade={{ duration: 100 }}
-		>
+		<div class="overlay" class:expanded={expandOverlay} transition:fade={{ duration: 100 }}>
 			<button
 				class="expand-overlay control"
 				type="button"
 				aria-label="expand-overlay"
 				class:active={expandOverlay}
 				on:click={(e) => {
-					expandOverlay = false;
+					expandOverlay = !expandOverlay;
 					e.stopImmediatePropagation();
 				}}
 			>
@@ -110,7 +104,6 @@
 		will-change: transform;
 		transform: translateY(calc(100% - 5.5rem));
 		transition: transform var(--transition-duration-long);
-		cursor: pointer;
 	}
 	@media (min-width: 64rem) {
 		.overlay {
