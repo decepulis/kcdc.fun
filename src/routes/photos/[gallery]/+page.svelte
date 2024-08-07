@@ -10,5 +10,8 @@
 <section class="layout-container">
 	<h1>{data.title}</h1>
 	<Grid items={data.items} />
+	<p>
+		<a href="/photos">&larr; All photos</a>
+	</p>
 </section>
 <Viewer items={data.items} />
