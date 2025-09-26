@@ -156,6 +156,14 @@ const gallery = {
 			validation: (Rule) => Rule.required()
 		},
 		{
+			name: 'shared',
+			type: 'boolean',
+			title: 'Shared',
+			description: 'If true, this gallery is hosted at a direct link and not listed publicly.',
+			initialValue: false,
+			validation: (Rule) => Rule.required()
+		},
+		{
 			name: 'slug',
 			type: 'slug',
 			title: 'Slug',
@@ -192,7 +200,7 @@ const gallery = {
 			title: 'Items',
 			type: 'array',
 			components: {
-				input:GalleryUploadArray
+				input: GalleryUploadArray
 			},
 			of: [galleryVideo, galleryPhoto, galleryTitle]
 		}

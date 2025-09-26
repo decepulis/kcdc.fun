@@ -1,36 +1,35 @@
 {
   "name": "studio.kcdc.fun",
   "private": true,
-  "version": "3.0.0",
-  "description": "",
+  "version": "4.0.0",
   "main": "package.json",
-  "author": "Darius Cepulis <de.cepulis@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build",
-    "dev": "sanity dev"
+    "build": "sanity build"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/eslint-config-studio": "^3.0.1",
-    "@sanity/ui": "^1.8.2",
-    "@sanity/vision": "^3.16.4",
-    "eslint": "^8.49.0",
+    "@sanity/ui": "^3.1.7",
+    "@sanity/vision": "^4.10.1",
     "exifr": "^7.1.3",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "react-icons": "^4.11.0",
-    "sanity": "^3.16.4",
-    "sanity-plugin-media": "^2.2.2",
-    "sanity-plugin-mux-input": "^2.2.3",
-    "styled-components": "^5.2"
+    "react": "^19.1",
+    "react-dom": "^19.1",
+    "react-dropzone": "^14.3.8",
+    "react-icons": "^5.5.0",
+    "sanity": "^4.10.1",
+    "sanity-plugin-media": "^4.0.0",
+    "sanity-plugin-mux-input": "^2.9.0",
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
-    "@sanity/cli": "^3.16.4"
+    "@sanity/eslint-config-studio": "^5.0.2",
+    "@types/react": "^19.1",
+    "eslint": "^9.28",
+    "prettier": "^3.5",
+    "typescript": "^5.8"
   }
 }
